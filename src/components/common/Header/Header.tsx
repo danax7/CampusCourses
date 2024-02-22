@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Logo } from '..';
-import { HEADER_LINKS } from '@/lib/constants/navigation/HEADER_LINKS';
+import { HEADER_LINKS } from '@/utils/constants/navigation/HEADER_LINKS';
 
 export const Header = () => (
   <header className='flex md:px-10 py-4 border-b-2 px-4'>
@@ -9,7 +9,7 @@ export const Header = () => (
       Campus Couses
     </div>
     <nav className='flex items-center gap-6 text-sm'>
-      {HEADER_LINKS.map((link, index) => (
+      {/* {HEADER_LINKS.map((link, index) => (
         <Link
           to={link.href}
           className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
@@ -17,7 +17,7 @@ export const Header = () => (
         >
           <span>{link.text}</span>
         </Link>
-      ))}
+      ))} */}
     </nav>
   </header>
 );

@@ -1,5 +1,5 @@
 import logo from '@/assets/react.svg';
-import { cn } from '@/lib';
+import { cn } from '@/utils';
 import React from 'react';
 
 interface LogoProps extends React.ComponentPropsWithRef<'img'> {}
