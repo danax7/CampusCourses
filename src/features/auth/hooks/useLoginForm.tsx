@@ -18,7 +18,10 @@ export const useLoginForm = () => {
   const postLogin = usePostLoginMutation();
 
   const onSubmit = loginForm.handleSubmit(async (values) => {
-    await postLogin.mutateAsync(values);
+    const res = await postLogin.mutateAsync(values);
+
+    localStorage.setItem("token", res.data.token)
+    
     navigate('/');
   });
 

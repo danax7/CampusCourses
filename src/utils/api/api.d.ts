@@ -16,7 +16,7 @@ type RequestParams<Params = undefined> = Params extends undefined
 
 interface UserRegisterDto {
   fullName: string;
-  birthDate?: string;
+  birthDate: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -27,4 +27,8 @@ interface UserLoginDto {
   password: string;
 }
 
-type UserRole = 'admin' | 'teacher' | 'student';
+interface TokenResponse {
+  token: string;
+}
+
+type UserRole = 'teacherAndStudent' | 'teacher' | 'student' | 'user' | 'guest';

@@ -19,7 +19,7 @@ export const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={functions.onSubmit} className='space-y-3'>
+      <form onSubmit={functions.onSubmit} className='space-y-3 max-w-96 w-96'>
         <FormField
           control={form.control}
           name='email'
