@@ -21,7 +21,7 @@ export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
 
             if (responseError?.response?.status === 401) {
                 localStorage.clear();
-                navigate('/auth');
+                navigate('/login');
             }
 
             toast.error(responseError.response.data.message, {
@@ -35,7 +35,7 @@ export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
 
             if (responseError?.response?.status === 401) {
               localStorage.clear();
-              navigate('/auth');
+              navigate('/login');
             }
 
             toast.error(responseError?.response?.data.message, {

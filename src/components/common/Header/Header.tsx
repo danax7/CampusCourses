@@ -3,16 +3,15 @@ import { Logo } from '..';
 import { getNavigationLinksByUserRole } from '@/utils/helpers/getNavigationLinksByRole';
 import { Button } from '@/components/ui';
 import { useSelector } from 'react-redux';
-import { selectIsAuthenticated, selectUserEmail } from '@/utils/AuthSlice/slice';
+import { selectIsAuthenticated, selectUserEmail, selectUserRoles } from '@/utils/AuthSlice/slice';
 import { useHeader } from './hooks/useHeader';
 
 export const Header = () => {
 const isAuth = useSelector(selectIsAuthenticated);
 const email = useSelector(selectUserEmail);
-const {handleLogout} = useHeader();
-const userRole:UserRole = 'user';
-
-const links = getNavigationLinksByUserRole(userRole);
+const role = useSelector(selectUserRoles);
+const { handleLogout } = useHeader();
+const links = getNavigationLinksByUserRole(role);
 
 return (
   <header className='flex md:px-10 py-4 border-b-2 px-4'>
@@ -21,18 +20,21 @@ return (
     Campus Couses
   </div>
   <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>
-    {links.map((link, index) => (
-    <div>
-      <Link
-        to={link.href}
-        className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
-        key={index}
-      >
-        <span>{link.text}</span>
-      </Link>
-    </div>
-    ))}
-    {!isAuth && (
+     {isAuth && (
+      links.map((link, index) => (
+        <div>
+          <Link
+            to={link.href}
+            className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
+            key={index}
+          >
+            <span>{link.text}</span>
+          </Link>
+        </div>
+      ))
+    )}
+  </nav>
+  {!isAuth && (
       <div className='space-x-2'>
         <Button>
           <Link
@@ -64,8 +66,6 @@ return (
         </Button>
       </div>
     )}
-  
-  </nav>
   </header>
   )
 }

@@ -8,6 +8,19 @@ interface MutationSettings<Params = void, Func = unknown> {
   >;
 }
 
+interface QuerySettings<Func = unknown> {
+  config?: ApiRequestConfig;
+  options?: Omit<
+    import('@tanstack/react-query').UseQueryOptions<
+      Awaited<ReturnType<Func>>,
+      any,
+      Awaited<ReturnType<Func>>,
+      any
+    >,
+    'queryKey'
+  >;
+}
+
 type ResponseError = Error & { config: RequestConfig; response: InterceptorResponseResult };
 
 type RequestParams<Params = undefined> = Params extends undefined
@@ -37,4 +50,9 @@ interface UserRolesResponse{
   isTeacher: boolean,
   isStudent: boolean,
   isAdmin: boolean
+}
+
+interface GroupLiteDto {
+  id: string;
+  name: string;
 }

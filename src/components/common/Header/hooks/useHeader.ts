@@ -1,5 +1,5 @@
-import { postUserLogout } from "@/utils/api/requests/logout"
 import { clearToken } from '@/utils/AuthSlice/slice';
+import { postUserLogout } from '@/utils/api/requests/user/logout';
 import { AppDispatch } from "@/utils/store/store";
 import { useDispatch } from "react-redux";
 

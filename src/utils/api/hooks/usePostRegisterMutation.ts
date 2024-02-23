@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { PostUserRegisterParams, postUserRegister } from '../requests/register';
+import { PostUserRegisterParams, postUserRegister } from '../requests/user/register';
 
 
 export const usePostRegisterMutation = (
