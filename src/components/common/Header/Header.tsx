@@ -20,7 +20,7 @@ return (
     Campus Couses
   </div>
   <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>
-     {isAuth && (
+    {isAuth && (
       links.map((link, index) => (
         <div>
           <Link

@@ -1,20 +1,19 @@
-import { useGetGroupsQuery } from "@/utils/api/hooks/useGetGroupsQuery";
-
+import { Button } from "@/components/ui";
+import { Groups } from "@/features/groups/Groups";
+import { selectUserRoles } from "@/utils/AuthSlice/slice";
+import { useSelector } from "react-redux";
 export const GroupsPage = () => {
-    const { data: groups, isLoading } = useGetGroupsQuery();
+    const userRole = useSelector(selectUserRoles);
 
     return (
-    <div className="p-16">
-        <div className="flex flex-col space-y-4">
-                {!isLoading && (
-                    (groups?.data?.map((group, index) => (
-                    <div key={index}>
-                        <span>{group.name}</span>
-                    </div>
-                ))
-            )
-        )}
+        <div className="py-6 md:px-40 px-10">
+            <div className="space-y-2">
+                <h2 className="font-semibold text-3xl">Группы кампусных курсов</h2>
+                {userRole.isAdmin && (
+                    <Button>Создать группу</Button>
+                )}
+            </div>
+            <Groups/>
         </div>
-    </div>
     )
 }
