@@ -7,6 +7,6 @@ export const usePostCreateGroupMutation = (
   useMutation({
     mutationKey: ['postCreateGroup'],
     mutationFn: (params) =>
-    postCreateGroup({ params, ...(settings?.config && { config: settings.config }) }),
+      postCreateGroup({ params, ...(settings?.config && { config: settings.config }) }),
     ...settings?.options
   });

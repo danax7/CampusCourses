@@ -1,4 +1,4 @@
-import { api } from "@/utils/api/instance";
+import { api } from '@/utils/api/instance';
 
 export type PostUserRegisterParams = UserRegisterDto;
 

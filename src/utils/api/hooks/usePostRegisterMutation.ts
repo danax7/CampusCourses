@@ -8,6 +8,6 @@ export const usePostRegisterMutation = (
   useMutation({
     mutationKey: ['postRegister'],
     mutationFn: (params) =>
-    postUserRegister({ params, ...(settings?.config && { config: settings.config }) }),
+      postUserRegister({ params, ...(settings?.config && { config: settings.config }) }),
     ...settings?.options
   });

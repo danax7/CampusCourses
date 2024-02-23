@@ -8,6 +8,6 @@ export const usePostLoginMutation = (
   useMutation({
     mutationKey: ['postLogin'],
     mutationFn: (params) =>
-    postUserLogin({ params, ...(settings?.config && { config: settings.config }) }),
+      postUserLogin({ params, ...(settings?.config && { config: settings.config }) }),
     ...settings?.options
   });

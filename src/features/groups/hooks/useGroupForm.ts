@@ -9,25 +9,25 @@ export const useGroupForm = () => {
   const groupForm = useForm<GroupSchema>({
     resolver: zodResolver(groupSchema),
     defaultValues: {
-        name: ''
+      name: ''
     }
   });
 
   const postCreateGroup = usePostCreateGroupMutation();
 
   const onSubmit = groupForm.handleSubmit(async (values) => {
-    await postCreateGroup.mutateAsync(values);
-    if (postCreateGroup.isSuccess){
-      toast.error('Группа успешно создана', {
+    const res = await postCreateGroup.mutateAsync(values);
+    if (res.data){
+      toast.info('Группа успешно создана', {
         cancel: { label: 'Close' }
       });
     }
-   
+
   });
 
   return {
     state: {
-        isLoading: postCreateGroup.isPending
+      isLoading: postCreateGroup.isPending
     },
     form: groupForm,
     functions: { onSubmit }

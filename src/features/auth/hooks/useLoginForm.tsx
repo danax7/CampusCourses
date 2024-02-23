@@ -12,12 +12,12 @@ import { getRoles } from '@/utils/api/requests/user/roles';
 export const useLoginForm = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  
+
   const loginForm = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-        email: '',
-        password: '',
+      email: '',
+      password: ''
     }
   });
 
@@ -25,12 +25,13 @@ export const useLoginForm = () => {
 
   const onSubmit = loginForm.handleSubmit(async (values) => {
     const res = await postLogin.mutateAsync(values);
-    
+
     localStorage.setItem('email', values.email)
     dispatch(setToken(res.data.token))
 
     if (res.data){
       const roles = (await getRoles()).data;
+      localStorage.setItem('roles', JSON.stringify(roles));
       dispatch(setRoles(roles));
     }
 
@@ -39,7 +40,7 @@ export const useLoginForm = () => {
 
   return {
     state: {
-        isLoading: postLogin.isPending
+      isLoading: postLogin.isPending
     },
     form: loginForm,
     functions: { onSubmit }
