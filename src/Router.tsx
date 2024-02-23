@@ -3,6 +3,7 @@ import { App } from "./App";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { RegistartionPage } from "./pages/RegistartionPage/RegistrationPage";
 import { GroupsPage } from "./pages/GroupsPage/GroupsPage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 export const Router = createBrowserRouter([
@@ -21,6 +22,10 @@ export const Router = createBrowserRouter([
       {
         path: '/groups',
         element: <GroupsPage />,
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />,
       },
     ],
   },

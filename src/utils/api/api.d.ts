@@ -35,6 +35,17 @@ interface UserRegisterDto {
   confirmPassword: string;
 }
 
+interface UserEditDto {
+  fullName: string;
+  birthDate: string;
+}
+
+interface UserProfileDto {
+  fullName: string;
+  birthDate: string;
+  email: string;
+}
+
 interface UserLoginDto {
   email: string;
   password: string;
