@@ -56,3 +56,7 @@ interface GroupLiteDto {
   id: string;
   name: string;
 }
+
+interface GroupCreateDto {
+  name: string;
+}

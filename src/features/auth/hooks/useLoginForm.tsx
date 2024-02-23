@@ -30,7 +30,6 @@ export const useLoginForm = () => {
     dispatch(setToken(res.data.token))
 
     if (res.data){
-      console.log('@@@@')
       const roles = (await getRoles()).data;
       dispatch(setRoles(roles));
     }
