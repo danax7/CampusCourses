@@ -2,10 +2,16 @@ import { Link } from 'react-router-dom';
 import { Logo } from '..';
 import { getNavigationLinksByUserRole } from '@/utils/helpers/getNavigationLinksByRole';
 import { Button } from '@/components/ui';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated, selectUserEmail } from '@/utils/AuthSlice/slice';
+import { useHeader } from './hooks/useHeader';
 
 export const Header = () => {
+const isAuth = useSelector(selectIsAuthenticated);
+const email = useSelector(selectUserEmail);
+const {handleLogout} = useHeader();
 const userRole:UserRole = 'user';
-const isAuth = localStorage.getItem('token');
+
 const links = getNavigationLinksByUserRole(userRole);
 
 return (
@@ -43,7 +49,20 @@ return (
           </Link>
         </Button>
       </div>
-   
+    )}
+     {isAuth && (
+      <div className='space-x-2'>
+        <Button>
+          <Link
+          to={'/profile'}
+          >
+            <span>{email}</span>
+          </Link>
+        </Button>
+        <Button onClick={handleLogout}>
+          <span>Выйти</span>
+        </Button>
+      </div>
     )}
   
   </nav>

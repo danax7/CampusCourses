@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { Check, ChevronsUpDown } from 'lucide-react';

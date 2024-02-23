@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
