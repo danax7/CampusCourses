@@ -1,10 +1,12 @@
 import { Button } from '@/components/ui';
+import { deleteGroup } from '@/utils/api/requests/groups/delete';
 import { Link } from 'react-router-dom';
 
 interface GroupInfoCardProps {
     group: GroupLiteDto;
     isAdmin: boolean
 }
+
 export const GroupInfoCard = ({group, isAdmin}:GroupInfoCardProps ) => (
   <div className='flex items-center border-2 p-2 rounded-md'>
     <div className='flex-auto'>
@@ -17,7 +19,7 @@ export const GroupInfoCard = ({group, isAdmin}:GroupInfoCardProps ) => (
         <Button variant={'secondary'}>
             Редактировать
         </Button>
-        <Button>
+        <Button onClick={() => deleteGroup({params: { id: group.id }})}>
             Удалить
         </Button>
       </div>)

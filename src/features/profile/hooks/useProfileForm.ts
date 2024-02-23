@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ProfileEditSchema, profileEditSchema } from '../constants/ProfileEditSchema';
 import { usePutProfileEditMutation } from '@/utils/api/hooks/usePutProfileEditMutation';
 import { getProfile } from '@/utils/api/requests/user/profile/get';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 

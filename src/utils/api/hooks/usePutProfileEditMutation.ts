@@ -1,10 +1,10 @@
+import { PutUserEditParams } from './../requests/user/profile/edit/index';
 import { useMutation } from '@tanstack/react-query';
 import { putProfileEdit } from '../requests/user/profile/edit';
-import { PutProfileEditParams } from '../requests/groups/postCreateGroup';
 
 
 export const usePutProfileEditMutation = (
-  settings?: MutationSettings<PutProfileEditParams, typeof putProfileEdit>
+  settings?: MutationSettings<PutUserEditParams, typeof putProfileEdit>
 ) =>
   useMutation({
     mutationKey: ['putProfileEdit'],

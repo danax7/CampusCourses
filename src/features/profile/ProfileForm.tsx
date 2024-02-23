@@ -50,7 +50,7 @@ export const ProfileForm = () => {
               </FormItem>
             )}
           />
-          <Button type='submit' className='mt-3' loading={state.isPending}>
+          <Button type='submit' className='mt-3' loading={state.isLoading}>
             Сохранить
           </Button>
         </form>
