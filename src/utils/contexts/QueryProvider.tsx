@@ -9,7 +9,7 @@ interface QueryProviderProps {
 }
 
 export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
-  const naigate = useNavigate();
+  const navigate = useNavigate();
 
   const queryClient = React.useMemo(
     () =>
@@ -20,7 +20,8 @@ export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
             const responseError = error as ResponseError;
 
             if (responseError?.response?.status === 401) {
-                naigate('/auth');
+                localStorage.clear();
+                navigate('/auth');
             }
 
             toast.error(responseError.response.data.message, {
@@ -33,7 +34,8 @@ export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
             const responseError = error as ResponseError;
 
             if (responseError?.response?.status === 401) {
-                naigate('/auth');
+              localStorage.clear();
+              navigate('/auth');
             }
 
             toast.error(responseError?.response?.data.message, {

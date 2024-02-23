@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 export const useHeader = () => {
     const dispatch: AppDispatch = useDispatch();
     const handleLogout = () => {
-        postUserLogout;
+        postUserLogout();
         dispatch(clearToken())
    }
 

@@ -32,3 +32,9 @@ interface TokenResponse {
 }
 
 type UserRole = 'teacherAndStudent' | 'teacher' | 'student' | 'user' | 'guest';
+
+interface UserRolesResponse{
+  isTeacher: boolean,
+  isStudent: boolean,
+  isAdmin: boolean
+}

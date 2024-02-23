@@ -28,7 +28,7 @@ const authSlice = createSlice({
     clearToken: (state) => {
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.clear;
+      localStorage.clear();
     //   localStorage.removeItem("token");
     },
   },
