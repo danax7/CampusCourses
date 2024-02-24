@@ -3,12 +3,18 @@ import { ReloadIcon } from '@radix-ui/react-icons';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem
+} from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/utils';
 
 import { Input } from './input';
 import { ScrollArea } from './scroll-area';
+import { cn } from '@/utils';
 
 export interface ComboBoxItemType {
   value: string;
@@ -30,7 +36,7 @@ export type ComboboxProps = {
 };
 
 const popOverStyles = {
-  width: 'var(--radix-popover-trigger-width)',
+  width: 'var(--radix-popover-trigger-width)'
 };
 
 export const Combobox = ({
@@ -44,7 +50,7 @@ export const Combobox = ({
   unselect = false,
   unselectMsg = 'Оставить пустым',
   onSearchChange,
-  loading = false,
+  loading = false
 }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false);
 
@@ -59,12 +65,16 @@ export const Combobox = ({
         >
           <span className={cn('truncate', !value && 'text-muted-foreground')}>
             {!!onSearchChange && (value || selectItemMsg)}
-            {!onSearchChange && (value ? items.find((item) => item.value === value)?.label : selectItemMsg)}
+            {!onSearchChange &&
+              (value ? items.find((item) => item.value === value)?.label : selectItemMsg)}
           </span>
           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
-      <PopoverContent style={popOverStyles} className='popover-content-width-same-as-its-trigger p-0'>
+      <PopoverContent
+        style={popOverStyles}
+        className='popover-content-width-same-as-its-trigger p-0'
+      >
         <Command>
           {!!onSearchChange && (
             <Input
@@ -73,12 +83,16 @@ export const Combobox = ({
               onChange={(event) => onSearchChange(event.currentTarget.value)}
             />
           )}
-          {!onSearchChange && <CommandInput placeholder={searchPlaceholder} onValueChange={onSearchChange} />}
+          {!onSearchChange && (
+            <CommandInput placeholder={searchPlaceholder} onValueChange={onSearchChange} />
+          )}
           <CommandEmpty>
             {loading && <ReloadIcon className='mx-auto h-4 w-4 animate-spin' />}
             {!loading && noResultsMsg}
           </CommandEmpty>
-          <ScrollArea className={cn('max-h-[220px] overflow-auto', !items.length && !unselect && 'hidden')}>
+          <ScrollArea
+            className={cn('max-h-[220px] overflow-auto', !items.length && !unselect && 'hidden')}
+          >
             <CommandGroup>
               {unselect && (
                 <CommandItem
@@ -89,7 +103,9 @@ export const Combobox = ({
                     setOpen(false);
                   }}
                 >
-                  <Check className={cn('mr-2 h-4 w-4', value === '' ? 'opacity-100' : 'opacity-0')} />
+                  <Check
+                    className={cn('mr-2 h-4 w-4', value === '' ? 'opacity-100' : 'opacity-0')}
+                  />
                   {unselectMsg}
                 </CommandItem>
               )}
@@ -102,7 +118,12 @@ export const Combobox = ({
                     setOpen(false);
                   }}
                 >
-                  <Check className={cn('mr-2 h-4 w-4', value === item.value ? 'opacity-100' : 'opacity-0')} />
+                  <Check
+                    className={cn(
+                      'mr-2 h-4 w-4',
+                      value === item.value ? 'opacity-100' : 'opacity-0'
+                    )}
+                  />
                   {item.label}
                 </CommandItem>
               ))}

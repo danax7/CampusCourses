@@ -5,8 +5,9 @@ import { usePostCreateGroupMutation } from '@/utils/api/hooks/usePostGroupMutati
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePutGroupEditMutation } from '@/utils/api/hooks/usePutGroupEditMutation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CourseCreateSchema, courceCreateSchema } from '../constants/CourceCreateSchema';
+import { useGetUsersQuery } from '@/utils/api/hooks/useGetUsersQuery';
 
 
 interface useCourseCreateFormProps {
@@ -15,8 +16,10 @@ interface useCourseCreateFormProps {
 }
 
 export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormProps) => {
-  
+  const [selectedUser, setSelectedUser] = useState('');
   const queryClient = useQueryClient();
+
+
 
   const courceCreateForm = useForm<CourseCreateSchema>({
     resolver: zodResolver(courceCreateSchema),
@@ -27,14 +30,22 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
       semester: '',
       requirements: '',
       annotations: '',
-    //   mainTeacherId:''
+      mainTeacherId:''
     }
   });
+
+  const handleUserSelect = (value: string | undefined) => {
+    console.log(value);
+    courceCreateForm.setValue('mainTeacherId', value!)
+    setSelectedUser(value || '');
+  };
 
   const postCreateGroup = usePostCreateGroupMutation();
   const putGroupEdit = usePutGroupEditMutation();
 
-  console.log(courceCreateForm.formState);
+  const getUsers = useGetUsersQuery();
+
+//   console.log(courceCreateForm.formState);
 
 //   useEffect(() => {
 //     if (actionType === 'edit') {
@@ -69,6 +80,9 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
       isLoading: postCreateGroup.isPending || putGroupEdit.isPending
     },
     form: courceCreateForm,
-    functions: { onSubmit }
+    functions: { onSubmit },
+    handleUserSelect,
+    selectedUser,
+    users: getUsers.data
   };
 };

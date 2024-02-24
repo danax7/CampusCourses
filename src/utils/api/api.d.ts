@@ -94,3 +94,8 @@ interface CampusCourseCreateDto{
   annotations: string,
   mainTeacherId: string
 }
+
+interface SearchUserDto {
+  id: string;
+  fullName: string;
+}

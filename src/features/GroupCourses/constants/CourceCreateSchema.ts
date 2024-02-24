@@ -19,9 +19,9 @@ export const courceCreateSchema = z.object({
     annotations:  z.string().min(1, {
         message: 'validation.required'
     }),
-    // mainTeacherId:  z.string().min(1, {
-    //     message: 'validation.required'
-    // }),
+    mainTeacherId:  z.string().min(1, {
+        message: 'validation.required'
+    }),
 
 
 });
