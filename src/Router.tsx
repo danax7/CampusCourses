@@ -4,13 +4,18 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { RegistartionPage } from "./pages/RegistartionPage/RegistrationPage";
 import { GroupsPage } from "./pages/GroupsPage/GroupsPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { MainPage } from "./pages/MainPage/MainPage";
 
 
 export const Router = createBrowserRouter([
   {
-    path: '/',
+    path: '',
     element: <App />,
     children: [
+      {
+        path: '',
+        element: <MainPage />,
+      },
       {
         path: '/login',
         element: <LoginPage />,

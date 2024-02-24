@@ -11,7 +11,7 @@ export const GroupsPage = () => {
     const userRole = useSelector(selectUserRoles);
 
     return (
-        <div className="py-6 md:px-40 px-10">
+        <div className="py-6 md:px-20 px-2">
              <div className="space-y-2">
                 <h2 className="font-semibold text-3xl">Группы кампусных курсов</h2>
                 {userRole.isAdmin && (

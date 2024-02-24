@@ -7,7 +7,7 @@ export const Groups = () => {
     const { data: groups, isLoading } = useGetGroupsQuery();
     const role = useSelector(selectUserRoles);
     return (
-    <div className="p-16">
+    <div className="md:p-16 p-2">
         <div className="flex flex-col space-y-4">
                 {!isLoading && (
                     (groups?.data?.map((group, index) => (

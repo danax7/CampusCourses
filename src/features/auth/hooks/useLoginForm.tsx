@@ -35,7 +35,7 @@ export const useLoginForm = () => {
       dispatch(setRoles(roles));
     }
 
-    navigate('/');
+    navigate('/groups');
   });
 
   return {

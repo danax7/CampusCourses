@@ -12,10 +12,11 @@ import { useGroupForm } from '../hooks/useGroupForm';
 
 interface EmployeeFormProps {
   actionType: 'add' | 'edit';
+  groupId?: string;
 }
 
-export const GroupForm = ({ actionType }: EmployeeFormProps) => {
-  const { state, form, functions } = useGroupForm();
+export const GroupForm = ({ actionType, groupId }: EmployeeFormProps) => {
+  const { state, form, functions } = useGroupForm({actionType, groupId});
   return (
     <Form {...form}>
       <form onSubmit={functions.onSubmit} className="flex w-full flex-col items-end">
