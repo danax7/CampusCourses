@@ -78,8 +78,19 @@ interface CampusCourseDto{
   startYear: number;
   maximumStudentsCount: number;
   remainingSlotsCount: number;
-  status: string;
+  status: СourseStatus;
   semester: string
 }
 
-const CourseStatuses = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished'
+type СourseStatus = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished'
+type Semester = 'Autumn' | 'Spring'
+
+interface CampusCourseCreateDto{
+  name: string;
+  startYear: number;
+  maximumStudentsCount: number;
+  semester: Semester;
+  requirements: string,
+  annotations: string,
+  mainTeacherId: string
+}

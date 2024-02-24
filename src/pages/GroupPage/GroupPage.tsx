@@ -1,34 +1,42 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
+import { Button } from "@/components/ui";
+import { CampusCourseCard } from "@/features/GroupCourses/component/CampusCourseCard/CampusCourseCard";
+import { CourseCreateEditDialog } from "@/features/GroupCourses/component/CourseCreateEditDialog/CourseCreateEditDialog";
+import { selectUserRoles } from "@/utils/AuthSlice/slice";
 import { useGetGroupCoursesByIdQuery } from "@/utils/api/hooks/useGetGroupCoursesQuery";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 export const GroupPage = () => {
     const { groupId } = useParams<{ groupId: string }>();
+    const userRole = useSelector(selectUserRoles);
     const { isLoading, isError, data, error, isSuccess } = useGetGroupCoursesByIdQuery(groupId!);
 
     return(
         <div className='py-6 md:px-20 px-2 space-y-4'>
-            {isSuccess && data && data.map((course) => (
-                <Card key={course.id}>
-                    <CardHeader>
-                        <CardTitle className='flex justify-between'>
-                            <span>{course.name}</span>
-                            <span>{course.status}</span>
-                        </CardTitle>
-                        <CardDescription>
-                            <p>Мест всего - {course.maximumStudentsCount}</p>
-                            <p>Мест всего - свободно {course.remainingSlotsCount}</p>
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Учебный год - {course.startYear}</p>
-                        <p>Семестр - {course.semester}</p>
-                    </CardContent>
-                </Card>
-            ))}
-            {isLoading && <p>Loading...</p>}
-            {isError && <p>Error: {error.message}</p>}
-            {isSuccess && data.length==0 && <div>У группы нет курсов на данный момент</div>}
+            <div>
+                {userRole.isAdmin && (
+                    <CourseCreateEditDialog 
+                    trigger={
+                        <Button >
+                          <PlusCircledIcon className='mr-2 h-4 w-4' />
+                          Создать курс
+                        </Button>
+                      }
+                      actionType='add'
+                    />
+                )}
+         
+            </div>
+            <div className='space-y-3'>
+                {isSuccess && data && data.map((course) => (
+                    <CampusCourseCard course={course}/>
+                ))}
+                {isLoading && <p>Loading...</p>}
+                {isError && <p>Error: {error.message}</p>}
+                {isSuccess && data.length==0 && <div>У группы нет курсов на данный момент</div>}
+            </div>
+     
         </div>
     )
 }
