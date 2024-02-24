@@ -71,3 +71,15 @@ interface GroupLiteDto {
 interface GroupCreateDto {
   name: string;
 }
+
+interface CampusCourseDto{
+  id: string;
+  name: string;
+  startYear: number;
+  maximumStudentsCount: number;
+  remainingSlotsCount: number;
+  status: string;
+  semester: string
+}
+
+const CourseStatuses = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished'

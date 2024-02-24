@@ -9,10 +9,10 @@ export const Groups = () => {
     return (
     <div className="md:p-16 p-2">
         <div className="flex flex-col space-y-4">
-                {!isLoading && (
-                    (groups?.data?.map((group, index) => (
-                    <GroupInfoCard group={group} key={index} isAdmin={role.isAdmin}/>
-                ))
+            {!isLoading && (
+                (groups?.data?.map((group, index) => (
+                <GroupInfoCard group={group} key={index} isAdmin={role.isAdmin}/>
+            ))
             )
         )}
         </div>

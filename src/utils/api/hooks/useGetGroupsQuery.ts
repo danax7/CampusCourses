@@ -1,5 +1,5 @@
-import { getGroups } from '@/utils/api/requests/groups/getAll';
 import { useQuery } from '@tanstack/react-query';
+import { getGroups } from '../requests/groups/getAll';
 
 export const useGetGroupsQuery = (settings?: QuerySettings<typeof getGroups>) =>
   { 
