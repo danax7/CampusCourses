@@ -15,10 +15,10 @@ import { GroupForm } from '../forms/GroupForm';
 interface GroupCreateEditDialogProps {
   trigger: JSX.Element;
   actionType: 'add' | 'edit';
-  groupId?: string;
+  group?: GroupLiteDto;
 }
 
-export const GroupCreateEditDialog = ({ trigger, actionType, groupId }: GroupCreateEditDialogProps) => {
+export const GroupCreateEditDialog = ({ trigger, actionType, group }: GroupCreateEditDialogProps) => {
 //   const { functions } = useEmployeeDialog();
   return (
     <Dialog>
@@ -37,7 +37,7 @@ export const GroupCreateEditDialog = ({ trigger, actionType, groupId }: GroupCre
           )}
         </DialogHeader>
         <div className='flex h-full flex-col items-end justify-between overflow-y-auto rounded-lg border p-5'>
-          <GroupForm actionType={actionType} groupId={groupId} />
+          <GroupForm actionType={actionType} group={group} />
         </div>
       </DialogContent>
     </Dialog>

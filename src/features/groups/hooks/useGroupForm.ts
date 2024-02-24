@@ -5,14 +5,15 @@ import { usePostCreateGroupMutation } from '@/utils/api/hooks/usePostGroupMutati
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePutGroupEditMutation } from '@/utils/api/hooks/usePutGroupEditMutation';
+import { useEffect } from 'react';
 
 
 interface useGroupFormProps {
   actionType: 'add' | 'edit';
-  groupId?: string;
+  group?: GroupLiteDto;
 }
 
-export const useGroupForm = ({actionType, groupId}:useGroupFormProps) => {
+export const useGroupForm = ({actionType, group}:useGroupFormProps) => {
   
   const queryClient = useQueryClient();
 
@@ -26,6 +27,12 @@ export const useGroupForm = ({actionType, groupId}:useGroupFormProps) => {
   const postCreateGroup = usePostCreateGroupMutation();
   const putGroupEdit = usePutGroupEditMutation();
 
+  useEffect(() => {
+    if (actionType === 'edit') {
+      groupForm.setValue('name', group?.name || '');
+    }
+  }, [actionType, group]);
+
   const onSubmit = groupForm.handleSubmit(async (values) => {
     if (actionType === 'add') {
       const res = await postCreateGroup.mutateAsync(values);
@@ -36,7 +43,8 @@ export const useGroupForm = ({actionType, groupId}:useGroupFormProps) => {
         });
       }
     } else if (actionType === 'edit') {
-      const res = await putGroupEdit.mutateAsync({ id: groupId, data: values });
+   
+      const res = await putGroupEdit.mutateAsync({ id: group?.id, data: values });
       if (res.data) {
         queryClient.invalidateQueries('getGroups');
         toast.info('Группа успешно отредактирована', {

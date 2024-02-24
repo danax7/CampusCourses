@@ -3,6 +3,7 @@ import { deleteGroup } from '@/utils/api/requests/groups/delete';
 import { Link } from 'react-router-dom';
 import { GroupCreateEditDialog } from '../../dialogs/GroupCreateEditDialog';
 import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 interface GroupInfoCardProps {
     group: GroupLiteDto;
@@ -12,10 +13,18 @@ interface GroupInfoCardProps {
 export const GroupInfoCard = ({group, isAdmin}: GroupInfoCardProps ) => {
   const queryClient = useQueryClient();
 
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const handleDeleteGroup = async () => {
-    await deleteGroup({params: { id: group.id }});
-    queryClient.invalidateQueries('getGroups'); 
+    setIsDeleting(true); 
+    try {
+      await deleteGroup({params: { id: group.id }});
+      queryClient.invalidateQueries('getGroups'); 
+    } finally {
+      setIsDeleting(false);
+    }
   };
+
 
   return (
     <div className='flex items-center border-2 p-2 rounded-md'>
@@ -32,10 +41,10 @@ export const GroupInfoCard = ({group, isAdmin}: GroupInfoCardProps ) => {
                 Редактировать
               </Button>
             }
-            groupId={group.id}
+            group={group}
             actionType='edit'
           />
-          <Button onClick={handleDeleteGroup}>
+          <Button onClick={handleDeleteGroup} loading={isDeleting}>
             Удалить
           </Button>
         </div>
