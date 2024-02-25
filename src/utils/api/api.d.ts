@@ -108,7 +108,7 @@ interface UserDto {
 
 interface NotificationDto {
   name: string;
-  email: string;
+  isImportant: string;
 }
 
 interface CampusCourseFullDto extends CampusCourseDto{

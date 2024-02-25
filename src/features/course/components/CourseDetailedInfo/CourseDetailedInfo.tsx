@@ -11,6 +11,7 @@ import { cn } from "@/utils";
 import { statusTexts } from "@/utils/constants/statusTexts";
 import { getStatusColor } from "@/utils/helpers/getStatusColor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Badge } from "@/components/ui/badge";
 
   
 interface CourceDetailedInfoProps{
@@ -18,7 +19,7 @@ interface CourceDetailedInfoProps{
 }
 
 export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
-
+    console.log(course)
     return (
         <div>
             <span className='text-3xl font-semibold'>{course.name}</span>
@@ -72,12 +73,48 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                 </CardFooter>
             </Card>
             <Tabs defaultValue="requirements" className="m-2 border-2 p-3 w-full rounded-md">
-                <TabsList>
+                <TabsList className='w-full'>
                     <TabsTrigger value="requirements" className='flex-auto'>Требования к курсу</TabsTrigger>
                     <TabsTrigger value="annotations" className='flex-auto'>Аннотации</TabsTrigger>
+                    <TabsTrigger value="notifications" className='flex-auto'>Уведомления</TabsTrigger>
                 </TabsList>
                 <TabsContent value="requirements">{course.requirements}</TabsContent>
                 <TabsContent value="annotations">{course.annotations}</TabsContent>
+                <TabsContent value="notifications">
+                    {course.notifications.length === 0 && (
+                        <span>
+                            Уведомлений пока нет
+                        </span>
+                    )}
+                    {course.notifications.map((notification, index)=> (
+                        <div key={index}>
+                            <span>{notification.name}</span>
+                            <span>{notification.isImportant}</span>
+                        </div>
+                    ))}
+                </TabsContent>
+            </Tabs>
+
+            <Tabs defaultValue="teachers" className="m-2 border-2 p-3 w-full rounded-md">
+                <TabsList className='w-full'>
+                    <TabsTrigger value="teachers" className='flex-auto'>Преподаватели</TabsTrigger>
+                    <TabsTrigger value="students" className='flex-auto'>Студенты</TabsTrigger>
+                </TabsList>
+                <TabsContent value="teachers">
+                    {course.teachers.map((teacher, index)=> (
+                        <div key={index} className='flex flex-col border-2 p-2 rounded-md'>
+                            <div className='space-x-2'>
+                                <span className='font-semibold'>{teacher.name}</span>
+                                <Badge>{teacher.isMain && 'основной'}</Badge>
+                            </div>
+                            <span>{teacher.email}</span>
+                      
+                        </div>
+                    ))}
+                </TabsContent>
+                <TabsContent value="students">
+                    {course.annotations}
+                </TabsContent>
             </Tabs>
 
         </div>
