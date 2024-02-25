@@ -11,6 +11,7 @@ import { getStatusColor } from "@/utils/helpers/getStatusColor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { CourseStatusEditDialog } from "../../dialogs/CourseStatusEditDialog";
 
   
 interface CourceDetailedInfoProps{
@@ -35,7 +36,15 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                             <h3 className='text-lg font-medium'>Статус курса</h3>
                             <span className={cn(getStatusColor(course.status))}>{statusTexts[course.status]}</span>
                         </div>
-                        <Button variant='secondary'>Изменить</Button>
+                        {/* {userRole.isAdmin && ( */}
+                            <CourseStatusEditDialog 
+                                trigger={
+                                    <Button variant='secondary'>Изменить</Button>
+                                }
+                                status={course.status}
+                            />
+                        {/* )} */}
+                      
                     </div>
 
                     <div className='flex justify-between flex-auto border-2 p-3 rounded-md items-center'>

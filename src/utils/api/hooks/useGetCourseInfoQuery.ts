@@ -3,7 +3,7 @@ import { getCourseInfoById } from "../requests/GroupsCampusCourses/CourseInfo";
 
 export const useGetCourseInfoByIdQuery = (id: string) => {
     return useQuery({
-        queryKey: ['groupCourses', id],
+        queryKey: ['groupCourseDetailedInfo', id],
         queryFn: () => getCourseInfoById(id),
     });
   };

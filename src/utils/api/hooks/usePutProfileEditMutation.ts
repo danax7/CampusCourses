@@ -11,4 +11,4 @@ export const usePutProfileEditMutation = (
     mutationFn: (params) =>
     putProfileEdit({ params, ...(settings?.config && { config: settings.config }) }),
     ...settings?.options
-  });
+});
