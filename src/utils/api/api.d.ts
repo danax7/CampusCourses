@@ -115,6 +115,8 @@ interface CampusCourseFullDto extends CampusCourseDto{
   maximumStudentsCount: number;
   studentsEnrolledCount: number;
   studentsInQueueCount: number;
+  requirements: string,
+  annotations: string,
   students: UserDto[],
   teachers: TeacherDto[],
   notifications: NotificationDto[]

@@ -1,32 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
 import { cn } from "@/utils";
+import { statusTexts } from "@/utils/constants/statusTexts";
+import { getStatusColor } from "@/utils/helpers/getStatusColor";
 import { Link } from "react-router-dom";
 
 interface CampusCourseCardProps{
     course: CampusCourseDto
 }
-
-const statusTexts: Record<СourseStatus, string> = {
-    'OpenForAssigning': 'Открыт для записи',
-    'Created': 'Создан',
-    'Started': 'В процессе обучения',
-    'Finished': 'Завершен',
-};
-
-const getStatusColor = (status: СourseStatus) => {
-    switch (status) {
-        case 'OpenForAssigning':
-            return 'text-green-600';
-        case 'Created':
-            return 'text-current';
-        case 'Started':
-            return 'text-blue-600';
-        case 'Finished':
-            return 'text-destructive';
-        default:
-            return '';
-    }
-};
 
 export const CampusCourseCard = ({course}: CampusCourseCardProps ) => (
     <Card key={course.id}>
