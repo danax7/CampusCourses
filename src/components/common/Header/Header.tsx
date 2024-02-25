@@ -14,28 +14,31 @@ const { handleLogout } = useHeader();
 const links = getNavigationLinksByUserRole(role);
 
 return (
-  <header className='flex md:px-10 py-4 border-b-2 px-4'>
+  <header className='flex md:px-10 py-4 border-b-2 px-4 justify-between'>
+    <div className='flex'>
       <Link to='' className='flex'>
         <div className='flex font-bold items-center mr-6'>
           <Logo />
           Campus Couses
         </div> 
       </Link> 
-  <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>
-    {isAuth && (
-      links.map((link, index) => (
-        <div>
-          <Link
-            to={link.href}
-            className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
-            key={index}
-          >
-            <span>{link.text}</span>
-          </Link>
-        </div>
-      ))
-    )}
-  </nav>
+      <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>
+        {isAuth && (
+          links.map((link, index) => (
+            <div>
+              <Link
+                to={link.href}
+                className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
+                key={index}
+              >
+                <span>{link.text}</span>
+              </Link>
+            </div>
+          ))
+        )}
+      </nav>
+
+    </div>
   {!isAuth && (
       <div className='space-x-2'>
         <Button>

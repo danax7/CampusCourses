@@ -43,7 +43,6 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
 
   const onSubmit = courceCreateForm.handleSubmit(async (values) => {
 
-    console.log(values);
     if (actionType === 'add') {
       const res = await postCreateCourse.mutateAsync({ groupId: groupId, data: values });
    

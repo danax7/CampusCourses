@@ -6,6 +6,7 @@ import { GroupsPage } from "./pages/GroupsPage/GroupsPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { GroupPage } from "./pages/GroupPage/GroupPage";
+import { TeachCoursesPage } from "./pages/TeachCoursesPage/TeachCoursesPage";
 
 
 export const Router = createBrowserRouter([
@@ -36,6 +37,10 @@ export const Router = createBrowserRouter([
       {
         path: '/profile',
         element: <ProfilePage />,
+      },
+      {
+        path: '/courses/teach',
+        element: <TeachCoursesPage />,
       },
     ],
   },
