@@ -85,15 +85,20 @@ interface CampusCourseDto{
 type СourseStatus = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished'
 type Semester = 'Autumn' | 'Spring'
 
-interface CampusCourseCreateDto{
+interface CampusCourseCreateDto {
   name: string;
   startYear: number;
   maximumStudentsCount: number;
-  semester: Semester;
+  semester: string;
   requirements: string,
   annotations: string,
   mainTeacherId: string
 }
+
+interface CampusCourseCreateDtoRequest extends CampusCourseCreateDto{
+  groupId: string;
+}
+
 
 interface SearchUserDto {
   id: string;

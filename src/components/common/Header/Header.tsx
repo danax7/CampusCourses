@@ -17,9 +17,8 @@ return (
   <header className='flex md:px-10 py-4 border-b-2 px-4'>
       <Link to='' className='flex'>
         <div className='flex font-bold items-center mr-6'>
-
-        <Logo />
-        Campus Couses
+          <Logo />
+          Campus Couses
         </div> 
       </Link> 
   <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>

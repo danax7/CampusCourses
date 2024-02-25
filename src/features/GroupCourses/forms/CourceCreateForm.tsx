@@ -1,11 +1,6 @@
 import {
     Button,
     Combobox,
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
     Form,
     FormControl,
     FormField,
@@ -13,17 +8,10 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-    ScrollArea
   } from '@/components/ui';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCourseCreateForm } from '../hooks/useCourceCreateForm';
 // import { UsersCombobox } from '../component/UserCombobox/UserCombobox.tsx';
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
-import { cn } from '@/lib/cn.ts';
-import { useGetUsersQuery } from '@/utils/api/hooks/useGetUsersQuery';
 import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxItems';
   
   interface CourceCreateProps {
@@ -36,7 +24,6 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
 
     // const users = getUsers.data
     // console.log(getUsers.data)
-    console.log(users)
     return (
       <Form {...form}>
         <form onSubmit={functions.onSubmit} className="flex w-full flex-col items-end">
@@ -207,10 +194,9 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
                           Основной преподаватель курса
                         </FormLabel>
                         <FormControl>
-                     
                           <div>
                             {users && (
-                                <Combobox
+                              <Combobox
                                 {...field}
                                 items={convertUsersToComboboxItems(users.data)}
                                 onSelect={handleUserSelect}
@@ -218,9 +204,7 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
                                 className='w-96'
                               />
                             )}
-                        
                           </div>
-                   
                         </FormControl>
                         <FormMessage>
                         {form.formState?.errors?.annotations && (
@@ -229,79 +213,7 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
                         </FormMessage>
                     </FormItem>
                     )}
-                />
-                {/* <FormField
-                    control={form.control}
-                    name="mainTeacherId"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                      <FormLabel>Основной преподаватель курса</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              role="combobox"
-                              className={cn(
-                                'w-[200px] justify-between',
-                                !field.value && 'text-muted-foreground',
-                              )}
-                            >
-                              {field.value
-                                ? users.find(
-                                  (u) => u.id === field.value,
-                                )?.fullName
-                                : 'Выберите пользователя'}
-                              <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-[200px] p-0">
-                          <Command>
-                            <CommandInput
-                              placeholder="Поиск преподавателя..."
-                              className="h-9"
-                            />
-                            <CommandEmpty>Пользователь не найден.</CommandEmpty>
-                            <CommandGroup className="overflow-auto max-h-80">
-                              {users?.data && (
-                                  <ScrollArea className="h-72 w-48 rounded-md border">
-                                  {users.data.map((u) => (
-                                    <CommandItem
-                                      value={u.fullname}
-                                      key={u.id}
-                                      onSelect={() => {
-                                        form.setValue('mainTeacherId', u.id);
-                                      }}
-                                    >
-                                      {u.fullname}
-                                      <CheckIcon
-                                        className={cn(
-                                          'ml-auto h-4 w-4',
-                                          u.id === field.value
-                                            ? 'opacity-100'
-                                            : 'opacity-0',
-                                        )}
-                                      />
-                                    </CommandItem>
-                                  ))}
-                                </ScrollArea>
-                              )}
-                  
-                            </CommandGroup>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage>
-                        {form.formState?.errors?.mainTeacherId && (
-                            <span>{form.formState.errors.mainTeacherId.message}</span>
-                        )}
-                        </FormMessage>
-                    </FormItem>
-                  )}
-                /> */}
-                  
-              
+                /> 
             </div>
           </div>
           <Button

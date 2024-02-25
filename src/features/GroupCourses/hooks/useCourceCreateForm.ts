@@ -1,13 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { GroupSchema, groupSchema } from '../constants/GroupSchema';
-import { usePostCreateGroupMutation } from '@/utils/api/hooks/usePostGroupMutation';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
-import { usePutGroupEditMutation } from '@/utils/api/hooks/usePutGroupEditMutation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CourseCreateSchema, courceCreateSchema } from '../constants/CourceCreateSchema';
 import { useGetUsersQuery } from '@/utils/api/hooks/useGetUsersQuery';
+import { usePostCourseCreateMutation } from '@/utils/api/hooks/usePostCourseCreateMutation';
+import { useParams } from 'react-router-dom';
 
 
 interface useCourseCreateFormProps {
@@ -16,10 +15,10 @@ interface useCourseCreateFormProps {
 }
 
 export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormProps) => {
+  const { groupId } = useParams<{ groupId: string }>();
   const [selectedUser, setSelectedUser] = useState('');
   const queryClient = useQueryClient();
-
-
+  const getUsers = useGetUsersQuery();
 
   const courceCreateForm = useForm<CourseCreateSchema>({
     resolver: zodResolver(courceCreateSchema),
@@ -40,30 +39,23 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
     setSelectedUser(value || '');
   };
 
-  const postCreateGroup = usePostCreateGroupMutation();
-  const putGroupEdit = usePutGroupEditMutation();
-
-  const getUsers = useGetUsersQuery();
-
-//   console.log(courceCreateForm.formState);
-
-//   useEffect(() => {
-//     if (actionType === 'edit') {
-//         courceCreateForm.setValue('name', group?.name || '');
-//     }
-//   }, [actionType, group]);
+  const postCreateCourse = usePostCourseCreateMutation();
 
   const onSubmit = courceCreateForm.handleSubmit(async (values) => {
+
     console.log(values);
-    // if (actionType === 'add') {
-    //   const res = await postCreateGroup.mutateAsync(values);
-    //   if (res.data) {
-    //     queryClient.invalidateQueries('getGroups');
-    //     toast.info('Группа успешно создана', {
-    //       cancel: { label: 'Close' }
-    //     });
-    //   }
-    // } else if (actionType === 'edit') {
+    if (actionType === 'add') {
+      const res = await postCreateCourse.mutateAsync({ groupId: groupId, data: values });
+   
+      if (res.data) {
+        queryClient.invalidateQueries('groupCourses');
+        toast.info('Курс успешно создан', {
+          cancel: { label: 'Close' }
+        });
+      }
+    } 
+    
+    // else if (actionType === 'edit') {
    
     //   const res = await putGroupEdit.mutateAsync({ id: group?.id, data: values });
     //   if (res.data) {
@@ -77,7 +69,7 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
 
   return {
     state: {
-      isLoading: postCreateGroup.isPending || putGroupEdit.isPending
+      isLoading: postCreateCourse.isPending
     },
     form: courceCreateForm,
     functions: { onSubmit },
