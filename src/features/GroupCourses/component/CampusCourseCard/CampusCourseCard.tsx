@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
 import { cn } from "@/utils";
+import { Link } from "react-router-dom";
 
 interface CampusCourseCardProps{
     course: CampusCourseDto
@@ -31,7 +32,9 @@ export const CampusCourseCard = ({course}: CampusCourseCardProps ) => (
     <Card key={course.id}>
                 <CardHeader>
                     <CardTitle className='flex justify-between'>
-                        <span>{course.name}</span>
+                        <Link to={`/courses/${course.id}`}>
+                            <span>{course.name}</span>
+                        </Link>
                         <span className={cn(getStatusColor(course.status))}>{statusTexts[course.status]}</span>
                     </CardTitle>
                 <CardDescription>

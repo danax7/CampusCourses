@@ -7,6 +7,7 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { GroupPage } from "./pages/GroupPage/GroupPage";
 import { TeachCoursesPage } from "./pages/TeachCoursesPage/TeachCoursesPage";
+import { CoursePage } from "./pages/CoursePage/CoursePage";
 
 
 export const Router = createBrowserRouter([
@@ -39,8 +40,12 @@ export const Router = createBrowserRouter([
         element: <ProfilePage />,
       },
       {
-        path: '/courses/teach',
+        path: '/courses/teaching/',
         element: <TeachCoursesPage />,
+      },
+      {
+        path: '/courses/:courseId',
+        element: <CoursePage />
       },
     ],
   },

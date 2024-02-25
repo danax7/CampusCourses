@@ -34,7 +34,6 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
   });
 
   const handleUserSelect = (value: string | undefined) => {
-    console.log(value);
     courceCreateForm.setValue('mainTeacherId', value!)
     setSelectedUser(value || '');
   };

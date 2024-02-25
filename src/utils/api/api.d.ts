@@ -95,10 +95,34 @@ interface CampusCourseCreateDto {
   mainTeacherId: string
 }
 
+interface TeacherDto {
+  name: string;
+  email: string;
+  isMain: boolean;
+}
+
+interface UserDto {
+  name: string;
+  email: string;
+}
+
+interface NotificationDto {
+  name: string;
+  email: string;
+}
+
+interface CampusCourseFullDto extends CampusCourseDto{
+  maximumStudentsCount: number;
+  studentsEnrolledCount: number;
+  studentsInQueueCount: number;
+  students: UserDto[],
+  teachers: TeacherDto[],
+  notifications: NotificationDto[]
+}
+
 interface CampusCourseCreateDtoRequest extends CampusCourseCreateDto{
   groupId: string;
 }
-
 
 interface SearchUserDto {
   id: string;
