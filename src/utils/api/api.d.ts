@@ -107,7 +107,7 @@ interface UserDto {
 }
 
 interface NotificationDto {
-  name: string;
+  text: string;
   isImportant: string;
 }
 

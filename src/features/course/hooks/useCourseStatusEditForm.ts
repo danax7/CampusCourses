@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { CourseStatusEditSchema, courseStatusEditSchema } from '../constants/courseStatusEditSchema';
 import { useParams } from 'react-router-dom';
 import { usePostEditCourseStatusMutation } from '@/utils/api/hooks/usePutEditCourseStatus';
@@ -13,7 +12,6 @@ interface useCourseStatusEditFormProps {
 }
 
 export const useCourseStatusEditForm = ({status}: useCourseStatusEditFormProps) => {
-    console.log(status)
   const queryClient = useQueryClient();
   const { courseId } = useParams<{ courseId: string }>();
 

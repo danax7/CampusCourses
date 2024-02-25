@@ -12,14 +12,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { CourseStatusEditDialog } from "../../dialogs/CourseStatusEditDialog";
-
+import { CreateNotificationDialog } from "../../dialogs/CreateNotificationDialog";
   
 interface CourceDetailedInfoProps{
     course: CampusCourseFullDto;
 }
 
 export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
-    console.log(course)
     return (
         <div>
             <span className='text-3xl font-semibold'>{course.name}</span>
@@ -86,10 +85,16 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                 <TabsContent value="requirements">{course.requirements}</TabsContent>
                 <TabsContent value="annotations">{course.annotations}</TabsContent>
                 <TabsContent value="notifications">
-                    <Button className='my-3'>         
-                        <PlusCircledIcon className='mr-2 h-4 w-4' />
-                            Создать уведомление
-                    </Button>
+                        {/* {userRole.isAdmin && ( */}
+                          <CreateNotificationDialog 
+                                trigger={
+                                    <Button className='my-3'>         
+                                        <PlusCircledIcon className='mr-2 h-4 w-4' />
+                                            Создать уведомление
+                                    </Button>
+                                }
+                            />
+                        {/* )} */}
                     <div>
                         {course.notifications.length === 0 && (
                             <span>
@@ -97,13 +102,18 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                             </span>
                         )}
                         {course.notifications.map((notification, index)=> (
-                            <div key={index}>
-                                <span>{notification.name}</span>
-                                <span>{notification.isImportant}</span>
+                        <div key={index} className={cn('flex flex-col border-2 p-4 rounded-md', notification.isImportant && 'bg-destructive')}>
+                            <div className='space-x-2'>
+                                <span className='font-semibold'>{notification.text}</span>
+                                {/* {notification.isImportant && 
+                                    <Badge className='bg-destructive'>
+                                        важное
+                                    </Badge>
+                                } */}
                             </div>
+                        </div>
                         ))}
                     </div>
-                
                 </TabsContent>
             </Tabs>
 
