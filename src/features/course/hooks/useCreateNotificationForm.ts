@@ -30,12 +30,13 @@ export const useCreateNotificationForm = () => {
             cancel: { label: 'Close' }
           });
         }
-      });
-  return {
-    state: {
-      isLoading: postCreateNotification.isPending
-    },
-    form: courseStatusEditForm,
-    functions: { onSubmit }
-  };
+    });
+    
+    return {
+        state: {
+        isLoading: postCreateNotification.isPending
+        },
+        form: courseStatusEditForm,
+        functions: { onSubmit }
+    };
 };

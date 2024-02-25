@@ -1,15 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { postEditCourseStatus } from '../requests/GroupsCampusCourses/CourseInfo/StatusEdit';
+import { putEditCourse } from '../requests/GroupsCampusCourses/CourseInfo/InfoEdit';
 
-
-
-export const usePostEditCourseStatusMutation = (
-    settings?: MutationSettings<typeof postEditCourseStatus>
+export const usePutEditCourseMutation = (
+    settings?: MutationSettings<typeof putEditCourse>
   ) =>
     useMutation({
-      mutationKey: ['putEditCourseStatus'],
+      mutationKey: ['putEditCourse'],
       mutationFn: (params) =>
-      postEditCourseStatus({
+      putEditCourse({
           id: params.id,
           data: params.data,
           ...(settings?.config && { config: settings.config })

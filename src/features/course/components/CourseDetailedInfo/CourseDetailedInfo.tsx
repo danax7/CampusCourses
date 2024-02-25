@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { CourseStatusEditDialog } from "../../dialogs/CourseStatusEditDialog";
 import { CreateNotificationDialog } from "../../dialogs/CreateNotificationDialog";
+import { CourseEditInfoDialog } from "../../dialogs/CourseEditInfoDialog";
   
 interface CourceDetailedInfoProps{
     course: CampusCourseFullDto;
@@ -26,7 +27,15 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                 <CardHeader>
                     <CardTitle className='flex justify-between'>
                         <span>Основные данные курса </span>
-                        <Button variant='secondary'>Редактировать</Button>
+                         {/* {userRole.isAdmin && ( */}
+                            <CourseEditInfoDialog 
+                                trigger={
+                                    <Button variant='secondary'>Редактировать</Button>
+                                }
+                                requirments={course.requirements}
+                                annotations={course.annotations}
+                            />
+                        {/* )} */}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className='space-y-2'>
@@ -140,7 +149,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                     </div>
                 </TabsContent>
                 <TabsContent value="students">
-                    {course.annotations}
+                    Тут будут студенты
                 </TabsContent>
             </Tabs>
 
