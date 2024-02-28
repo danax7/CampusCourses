@@ -130,3 +130,7 @@ interface SearchUserDto {
   id: string;
   fullName: string;
 }
+
+interface AddTeacherDto{
+  userId:string;
+}
