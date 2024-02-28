@@ -19,7 +19,7 @@ return (
       <Link to='' className='flex'>
         <div className='flex font-bold items-center mr-6'>
           <Logo />
-          Campus Couses
+          Campus Courses
         </div> 
       </Link> 
       <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>

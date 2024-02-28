@@ -17,6 +17,7 @@ import { CourseEditInfoDialog } from "../../dialogs/CourseEditInfoDialog";
 import { AddTeacherDialog } from "../../dialogs/AddTeacherDialog";
 import { selectUserRoles } from "@/utils/AuthSlice/slice";
 import { useSelector } from "react-redux";
+import { useCourseDetailedInfo } from "./hooks/useCourseDetailedInfo";
   
 interface CourceDetailedInfoProps{
     course: CampusCourseFullDto;
@@ -24,6 +25,8 @@ interface CourceDetailedInfoProps{
 
 export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
     const userRole = useSelector(selectUserRoles);
+    const {handleSignUpForCourse, isLoading} = useCourseDetailedInfo(course.id);
+
     return (
         <div>
             <span className='text-3xl font-semibold'>{course.name}</span>
@@ -55,7 +58,10 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                 }
                                 status={course.status}
                             />
-                        )} 
+                        )}
+                       <Button onClick={handleSignUpForCourse} loading={isLoading}>
+                            Записаться на курс
+                        </Button>
                     </div>
 
                     <div className='flex justify-between flex-auto border-2 p-3 rounded-md items-center'>
@@ -117,11 +123,11 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                         <div key={index} className={cn('flex flex-col border-2 p-4 rounded-md', notification.isImportant && 'bg-destructive')}>
                             <div className='space-x-2'>
                                 <span className='font-semibold'>{notification.text}</span>
-                                {notification.isImportant && 
+                                {/* {notification.isImportant && 
                                     <Badge className='bg-destructive'>
                                         важное
                                     </Badge>
-                                }
+                                } */}
                             </div>
                         </div>
                         ))}
@@ -158,7 +164,22 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                     </div>
                 </TabsContent>
                 <TabsContent value="students">
-                    Тут будут студенты
+                        {course.students.map((student)=> (
+                            <div key={student.id} className='flex flex-col border-2 p-4 rounded-md'>
+                                <div className='space-x-2'>
+                                    <span className='font-semibold'>{student.name}</span>
+                                </div>
+                                <span>{student.email}</span>
+                                <span>Статус - {student.status}</span>
+                                {student.status !== 'Accepted' && (
+                                    <div className='flex gap-2 my-2'>
+                                        <Button>Принять</Button>
+                                        <Button>Отклонить</Button>
+                                    </div>
+                                )}
+                               
+                            </div>
+                        ))}
                 </TabsContent>
             </Tabs>
 

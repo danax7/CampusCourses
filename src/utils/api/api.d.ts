@@ -101,9 +101,17 @@ interface TeacherDto {
   isMain: boolean;
 }
 
+// interface UserDto {
+//   name: string;
+//   email: string;
+// }
 interface UserDto {
+  id:string;
   name: string;
   email: string;
+  status: string;
+  midtermResult?: string;
+  finalResult?: string
 }
 
 interface NotificationDto {
@@ -134,3 +142,5 @@ interface SearchUserDto {
 interface AddTeacherDto{
   userId:string;
 }
+
+interface 

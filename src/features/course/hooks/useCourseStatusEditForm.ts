@@ -36,7 +36,7 @@ export const useCourseStatusEditForm = ({status}: useCourseStatusEditFormProps) 
 
   return {
     state: {
-      isLoading: postEditCourseStatus   .isPending
+      isLoading: postEditCourseStatus.isPending
     },
     form: courseStatusEditForm,
     functions: { onSubmit }
