@@ -165,7 +165,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                         ))}
                     </div>
                 </TabsContent>
-                <TabsContent value="students">
+                <TabsContent value="students" className='space-y-2'>
                         {course.students.map((student)=> (
                             <div key={student.id} className='flex flex-col border-2 p-4 rounded-md'>
                                 <div className='space-x-2'>
@@ -181,7 +181,6 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                         <Button>Отклонить</Button>
                                     </div>
                                 )}
-                               
                             </div>
                         ))}
                 </TabsContent>

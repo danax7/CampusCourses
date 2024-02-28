@@ -140,8 +140,10 @@ interface SearchUserDto {
   fullName: string;
 }
 
-interface AddTeacherDto{
+interface AddTeacherDto {
   userId:string;
 }
 
-interface 
+interface EditStudentStatusDto {
+  status: StudentStatuses;
+}
