@@ -12,3 +12,17 @@ export const getStatusColor = (status: СourseStatus) => {
             return '';
     }
 };
+
+
+export const getStudentStatusColor = (status: StudentStatuses) => {
+    switch (status) {
+        case 'InQueue':
+            return 'text-blue-600';
+        case 'Accepted':
+            return 'text-green-600';
+        case 'Declined':
+            return 'text-destructive';
+        default:
+            return '';
+    }
+};

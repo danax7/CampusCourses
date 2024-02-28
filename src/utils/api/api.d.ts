@@ -84,6 +84,7 @@ interface CampusCourseDto{
 
 type СourseStatus = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished'
 type Semester = 'Autumn' | 'Spring'
+type StudentStatuses = 'InQueue' | 'Accepted' |'Declined'
 
 interface CampusCourseCreateDto {
   name: string;
@@ -109,7 +110,7 @@ interface UserDto {
   id:string;
   name: string;
   email: string;
-  status: string;
+  status: StudentStatuses;
   midtermResult?: string;
   finalResult?: string
 }

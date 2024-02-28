@@ -6,8 +6,8 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import { cn } from "@/utils";
-import { statusTexts } from "@/utils/constants/statusTexts";
-import { getStatusColor } from "@/utils/helpers/getStatusColor";
+import { StudentStatusTexts, statusTexts } from "@/utils/constants/statusTexts";
+import { getStatusColor, getStudentStatusColor } from "@/utils/helpers/getStatusColor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
@@ -59,9 +59,11 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                 status={course.status}
                             />
                         )}
-                       <Button onClick={handleSignUpForCourse} loading={isLoading}>
-                            Записаться на курс
-                        </Button>
+                        {!userRole.isAdmin && (
+                            <Button onClick={handleSignUpForCourse} loading={isLoading}>
+                                Записаться на курс
+                            </Button>
+                        )}
                     </div>
 
                     <div className='flex justify-between flex-auto border-2 p-3 rounded-md items-center'>
@@ -170,7 +172,9 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                     <span className='font-semibold'>{student.name}</span>
                                 </div>
                                 <span>{student.email}</span>
-                                <span>Статус - {student.status}</span>
+                                <span>
+                                    Статус - <span className={cn(getStudentStatusColor(student.status))}>{StudentStatusTexts[student.status]}</span>
+                                </span>
                                 {student.status !== 'Accepted' && (
                                     <div className='flex gap-2 my-2'>
                                         <Button>Принять</Button>

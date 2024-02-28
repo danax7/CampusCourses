@@ -4,3 +4,9 @@ export const statusTexts: Record<СourseStatus, string> = {
     'Started': 'В процессе обучения',
     'Finished': 'Завершен',
 };
+
+export const StudentStatusTexts: Record<StudentStatuses, string> = {
+    'InQueue': 'В очереди',
+    'Accepted': 'Принят в группу',
+    'Declined': 'Отклонен'
+};
