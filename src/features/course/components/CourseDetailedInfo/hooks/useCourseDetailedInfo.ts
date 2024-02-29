@@ -12,7 +12,7 @@ export const useCourseDetailedInfo = (courseId: string) => {
   const handleSignUpForCourse = async () => {
     const res = await postSignUpForCourse.mutateAsync({ id: courseId });
 
-    if (postSignUpForCourse.data) {
+    if (res.data) {
       queryClient.invalidateQueries('groupCourseDetailedInfo');
       toast.info('Вы успешно вошли на курс', {
         cancel: { label: 'Close' }

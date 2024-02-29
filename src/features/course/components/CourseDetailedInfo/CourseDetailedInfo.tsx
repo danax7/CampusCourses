@@ -59,7 +59,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                 status={course.status}
                             />
                         )}
-                        {!userRole.isAdmin && (
+                        {(!userRole.isAdmin && course.status==="OpenForAssigning")&& (
                             <Button onClick={handleSignUpForCourse} loading={isLoading}>
                                 Записаться на курс
                             </Button>

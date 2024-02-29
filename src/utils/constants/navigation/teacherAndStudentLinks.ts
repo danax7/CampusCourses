@@ -13,9 +13,5 @@ export const TEACHER_AND_STUDENT_LINKS: NavigationLinkInfo[] = [
       text: 'Преподаваемые курсы',
       href: ROUTES.TEACHCOURSES,
     },
-    // {
-    //   text: 'Профиль',
-    //   href: ROUTES.PROFILE,
-    // },
   ];
   
