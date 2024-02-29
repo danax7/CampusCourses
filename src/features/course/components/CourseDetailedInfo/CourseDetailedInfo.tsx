@@ -25,7 +25,7 @@ interface CourceDetailedInfoProps{
 
 export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
     const userRole = useSelector(selectUserRoles);
-    const {handleSignUpForCourse, isLoading} = useCourseDetailedInfo(course.id);
+    const {handleSignUpForCourse, isLoading,isEditStatusLoading, handleChangeUserStatus} = useCourseDetailedInfo(course.id);
 
     return (
         <div>
@@ -177,8 +177,8 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                 </span>
                                 {student.status !== 'Accepted' && (
                                     <div className='flex gap-2 my-2'>
-                                        <Button>Принять</Button>
-                                        <Button>Отклонить</Button>
+                                        <Button onClick={() => handleChangeUserStatus(student.id, 'Accepted')} loading={isEditStatusLoading}>Принять</Button>
+                                        <Button onClick={() => handleChangeUserStatus(student.id, 'Declined')} loading={isEditStatusLoading}>Отклонить</Button>
                                     </div>
                                 )}
                             </div>

@@ -34,6 +34,7 @@ export const useCourseDetailedInfo = (courseId: string) => {
   return {
     handleSignUpForCourse,
     isLoading: postSignUpForCourse.isPending,
+    isEditStatusLoading: postEditStudentStatus.isPending,
     handleChangeUserStatus
   };
 };
