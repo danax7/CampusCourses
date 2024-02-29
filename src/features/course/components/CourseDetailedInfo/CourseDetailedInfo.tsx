@@ -175,7 +175,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                 <span>
                                     Статус - <span className={cn(getStudentStatusColor(student.status))}>{StudentStatusTexts[student.status]}</span>
                                 </span>
-                                {student.status !== 'Accepted' && (
+                                {(student.status !== 'Accepted' && student.status !== 'Declined') && (
                                     <div className='flex gap-2 my-2'>
                                         <Button onClick={() => handleChangeUserStatus(student.id, 'Accepted')} loading={isEditStatusLoading}>Принять</Button>
                                         <Button onClick={() => handleChangeUserStatus(student.id, 'Declined')} loading={isEditStatusLoading}>Отклонить</Button>
