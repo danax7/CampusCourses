@@ -26,3 +26,16 @@ export const getStudentStatusColor = (status: StudentStatuses) => {
             return '';
     }
 };
+
+export const getStudentMarkColor = (status?: StudentMarks) => {
+    switch (status) {
+        case undefined:
+            return 'bg-current';
+        case 'Passed':
+            return 'bg-green-600';
+        case 'Failed':
+            return 'bg-destructive';
+        default:
+            return '';
+    }
+};

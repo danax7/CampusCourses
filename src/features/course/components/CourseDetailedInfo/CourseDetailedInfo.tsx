@@ -6,8 +6,8 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import { cn } from "@/utils";
-import { StudentStatusTexts, statusTexts } from "@/utils/constants/statusTexts";
-import { getStatusColor, getStudentStatusColor } from "@/utils/helpers/getStatusColor";
+import { StudentMarkTexts, StudentStatusTexts, statusTexts } from "@/utils/constants/statusTexts";
+import { getStatusColor, getStudentMarkColor, getStudentStatusColor } from "@/utils/helpers/getStatusColor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
@@ -188,7 +188,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                                         <h4 className='cursor-pointer underline'>
                                                             Промежуточная аттестация - 
                                                         </h4>
-                                                        <h4>{student.midtermResult}</h4>
+                                                        <Badge className={cn(getStudentMarkColor(student.midtermResult))}>{StudentMarkTexts[student.midtermResult!]}</Badge>
                                                     </div>
                                                 }
                                                 markType="Midterm"
@@ -202,7 +202,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                                         <h4 className='cursor-pointer underline'>
                                                             Финальная аттестация - 
                                                         </h4>
-                                                        <h4>{student.finalResult}</h4>
+                                                        <Badge className={cn(getStudentMarkColor(student.finalResult))}>{StudentMarkTexts[student.finalResult!]}</Badge>
                                                     </div>
                                                 }
                                                 markType="Final"

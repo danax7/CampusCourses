@@ -10,3 +10,9 @@ export const StudentStatusTexts: Record<StudentStatuses, string> = {
     'Accepted': 'Принят в группу',
     'Declined': 'Отклонен'
 };
+
+export const StudentMarkTexts: Record<StudentMarks, string> = {
+    'Passed': 'Пройдена',
+    'Failed': 'Зафейлена',
+    'NotDefined': 'Отметки нет'
+};
