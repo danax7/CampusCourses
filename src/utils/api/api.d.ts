@@ -106,13 +106,22 @@ interface TeacherDto {
 //   name: string;
 //   email: string;
 // }
+
+type MarkType = 'Midterm' | 'Final'
+type StudentMarks = 'NotDefined' | 'Passed' | 'Failed'
+
 interface UserDto {
   id:string;
   name: string;
   email: string;
   status: StudentStatuses;
-  midtermResult?: string;
-  finalResult?: string
+  midtermResult?: StudentMarks;
+  finalResult?: StudentMarks
+}
+
+interface EditCourseStudentMarkDto {
+  markType: string;
+  mark: string
 }
 
 interface NotificationDto {

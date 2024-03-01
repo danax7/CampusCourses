@@ -18,6 +18,7 @@ import { AddTeacherDialog } from "../../dialogs/AddTeacherDialog";
 import { selectUserRoles } from "@/utils/AuthSlice/slice";
 import { useSelector } from "react-redux";
 import { useCourseDetailedInfo } from "./hooks/useCourseDetailedInfo";
+import { EditStudentMarkDialog } from "../../dialogs/EditStudentMarkDialog";
   
 interface CourceDetailedInfoProps{
     course: CampusCourseFullDto;
@@ -167,14 +168,51 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                 </TabsContent>
                 <TabsContent value="students" className='space-y-2'>
                         {course.students.map((student)=> (
-                            <div key={student.id} className='flex flex-col border-2 p-4 rounded-md'>
-                                <div className='space-x-2'>
-                                    <span className='font-semibold'>{student.name}</span>
+                            <div key={student.id} className='flex border-2 p-4 rounded-md items-center'>
+                                
+                                <div className='flex flex-col flex-auto'>
+                                    <div className='space-x-2'>
+                                        <span className='font-semibold'>{student.name}</span>
+                                    </div>
+                                    <span>{student.email}</span>
+                                    <span>
+                                        Статус - <span className={cn(getStudentStatusColor(student.status))}>{StudentStatusTexts[student.status]}</span>
+                                    </span>
                                 </div>
-                                <span>{student.email}</span>
-                                <span>
-                                    Статус - <span className={cn(getStudentStatusColor(student.status))}>{StudentStatusTexts[student.status]}</span>
-                                </span>
+                                {student.status !== 'Declined' && student.status!=='InQueue' &&(
+                                    <>
+                                       <div className='flex-auto'>
+                                            <EditStudentMarkDialog 
+                                                trigger={
+                                                    <div>    
+                                                        <h4 className='cursor-pointer underline'>
+                                                            Промежуточная аттестация - 
+                                                        </h4>
+                                                        <h4>{student.midtermResult}</h4>
+                                                    </div>
+                                                }
+                                                markType="Midterm"
+                                                studentId={student.id}
+                                            />
+                                        </div>
+                                        <div className='flex-auto'>
+                                            <EditStudentMarkDialog 
+                                                trigger={
+                                                    <div>   
+                                                        <h4 className='cursor-pointer underline'>
+                                                            Финальная аттестация - 
+                                                        </h4>
+                                                        <h4>{student.finalResult}</h4>
+                                                    </div>
+                                                }
+                                                markType="Final"
+                                                studentId={student.id}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                             
+                             
                                 {(student.status !== 'Accepted' && student.status !== 'Declined') && (
                                     <div className='flex gap-2 my-2'>
                                         <Button onClick={() => handleChangeUserStatus(student.id, 'Accepted')} loading={isEditStatusLoading}>Принять</Button>
