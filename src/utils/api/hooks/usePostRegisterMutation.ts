@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { PostUserRegisterParams, postUserRegister } from '../requests/register';
+import { PostUserRegisterParams, postUserRegister } from '../requests/user/register';
 
 
 export const usePostRegisterMutation = (
@@ -8,6 +8,6 @@ export const usePostRegisterMutation = (
   useMutation({
     mutationKey: ['postRegister'],
     mutationFn: (params) =>
-    postUserRegister({ params, ...(settings?.config && { config: settings.config }) }),
+      postUserRegister({ params, ...(settings?.config && { config: settings.config }) }),
     ...settings?.options
   });

@@ -1,8 +1,8 @@
 export const ROUTES = {
   ROOT: '/',
-  COURSESGROUPS: '/courses/groups',
-  MYCOURSES: '/courses/my',
-  TEACHCOURSES: 'courses/teach',
+  COURSESGROUPS: '/groups',
+  MYCOURSES: '/courses/my/',
+  TEACHCOURSES: 'courses/teaching/',
   AUTH: '/auth',
   PROFILE: '/profile',
 };

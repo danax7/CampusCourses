@@ -5,10 +5,10 @@ export const registrationSchema = z.object({
     .string()
     .min(1, {
       message: 'validation.required'
-    })
-    .email({
-      message: 'validation.email.format'
     }),
+    // .email({
+    //   message: 'validation.email.format'
+    // }),
   password: z.string().min(1, {
     message: 'validation.required'
   }),

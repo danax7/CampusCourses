@@ -6,7 +6,8 @@ import { RegistrationSchema, registrationSchema } from '../constants/Registratio
 import { usePostRegisterMutation } from '@/utils/api/hooks/usePostRegisterMutation';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/utils/store/store';
-import { setToken } from '@/utils/AuthSlice/slice';
+import { setRoles, setToken } from '@/utils/AuthSlice/slice';
+import { getRoles } from '@/utils/api/requests/user/roles';
 
 
 export const useRegistrationForm = () => {
@@ -32,8 +33,15 @@ export const useRegistrationForm = () => {
   
     const res = await postRegister.mutateAsync({ ...rest, birthDate: isoBirthDate });
 
-    localStorage.setItem("token", res.data.token)
+    localStorage.setItem('email', values.email)
     dispatch(setToken(res.data.token))
+
+    if (res.data){
+      const roles = (await getRoles()).data;
+      localStorage.setItem('roles', JSON.stringify(roles));
+      dispatch(setRoles(roles));
+    }
+
     
     navigate('/');
   });

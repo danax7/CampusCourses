@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { PostUserLoginParams, postUserLogin } from '../requests/login';
+import { PostUserLoginParams, postUserLogin } from '../requests/user/login';
 
 
 export const usePostLoginMutation = (
@@ -8,6 +8,6 @@ export const usePostLoginMutation = (
   useMutation({
     mutationKey: ['postLogin'],
     mutationFn: (params) =>
-    postUserLogin({ params, ...(settings?.config && { config: settings.config }) }),
+      postUserLogin({ params, ...(settings?.config && { config: settings.config }) }),
     ...settings?.options
   });
