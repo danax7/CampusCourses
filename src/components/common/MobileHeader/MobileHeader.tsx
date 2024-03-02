@@ -12,7 +12,7 @@ import { getNavigationLinksByUserRole } from "@/utils/helpers/getNavigationLinks
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 import { useHeader } from "../Header/hooks/useHeader";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 
   
@@ -32,56 +32,60 @@ export const MobileHeader = () => {
             </SheetTrigger>
             <SheetContent onInteractOutside={() => setSheetOpen(false)}>
                 <SheetHeader className='h-full'>
+                    <div className='flex justify-end'>
+                        <X className="h-4 w-4" onClick={() => setSheetOpen(false)}/>
+                    </div>
                 <SheetTitle>Список страниц</SheetTitle>
                 <SheetDescription className='h-full flex flex-col'>
                 <nav className='items-center text-sm flex-auto justify-between flex-col space-y-4 my-6 '>
-                {isAuth && (
-                    links.map((link, index) => (
-                        <div>
-                        <Link
-                            to={link.href}
-                            className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
-                            key={index}
-                            onClick={() => setSheetOpen(false)}
-                        >
-                            <span>{link.text}</span>
-                        </Link>
-                        </div>
-                    ))
-                )}
-            </nav>
+                    {isAuth && (
+                        links.map((link, index) => (
+                            <div>
+                            <Link
+                                to={link.href}
+                                className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
+                                key={index}
+                                onClick={() => setSheetOpen(false)}
+                            >
+                                <span>{link.text}</span>
+                            </Link>
+                            </div>
+                        ))
+                    )}
+                </nav>
                 {!isAuth && (
-            <div className='flex gap-2 items-center'>
-                <Button onClick={() => setSheetOpen(false)}>
-                    <Link
-                    to={'/registration'}
-                    >
-                        <span>Зарегестрироваться</span>
-                    </Link>
-                </Button>
-                <Button>
-                <Link
-                to={'/login'}
-                >
-                    <span>Войти</span>
-                </Link>
-                </Button>
-            </div>
-            )}
-            {isAuth && (
-            <div className='flex gap-2 items-center'>
-                <Button onClick={() => setSheetOpen(false)}>
-                    <Link
-                    to={'/profile'}
-                    >
-                        <span>{email}</span>
-                    </Link>
-                    </Button>
-                    <Button onClick={handleLogout}>
-                    <span>Выйти</span>
-                </Button>
-            </div>
-            )}
+                    <div className='flex gap-2 items-center'>
+                        <Button onClick={() => setSheetOpen(false)}>
+                            <Link
+                            to={'/registration'}
+                            >
+                                <span>Зарегестрироваться</span>
+                            </Link>
+                        </Button>
+                        <Button>
+                            <Link
+                                to={'/login'}
+                                onClick={() => setSheetOpen(false)}
+                                >
+                                <span>Войти</span>
+                            </Link>
+                        </Button>
+                    </div>
+                    )}
+                    {isAuth && (
+                    <div className='flex gap-2 items-center'>
+                        <Button onClick={() => setSheetOpen(false)}>
+                            <Link
+                            to={'/profile'}
+                            >
+                                <span>{email}</span>
+                            </Link>
+                            </Button>
+                            <Button onClick={handleLogout} onClick={() => setSheetOpen(false)}>
+                            <span>Выйти</span>
+                        </Button>
+                    </div>
+                    )}
                 </SheetDescription>
                 </SheetHeader>
             </SheetContent>
