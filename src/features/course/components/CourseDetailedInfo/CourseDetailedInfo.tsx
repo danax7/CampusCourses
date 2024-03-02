@@ -99,7 +99,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
             </Card>
             <Tabs defaultValue="requirements" className="m-2 border-2 p-3 rounded-md">
                 <TabsList className='w-full'>
-                    <TabsTrigger value="requirements" className='flex-auto'>Требования к курсу</TabsTrigger>
+                    <TabsTrigger value="requirements" className='flex-auto'>Требования</TabsTrigger>
                     <TabsTrigger value="annotations" className='flex-auto'>Аннотации</TabsTrigger>
                     <TabsTrigger value="notifications" className='flex-auto'>Уведомления</TabsTrigger>
                 </TabsList>
@@ -168,7 +168,7 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                 </TabsContent>
                 <TabsContent value="students" className='space-y-2'>
                         {course.students.map((student)=> (
-                            <div key={student.id} className='flex border-2 p-4 rounded-md items-center'>
+                            <div key={student.id} className='flex border-2 p-4 rounded-md items-center overflow-auto gap-6'>
                                 
                                 <div className='flex flex-col flex-auto'>
                                     <div className='space-x-2'>
@@ -184,9 +184,9 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                        <div className='flex-auto'>
                                             <EditStudentMarkDialog 
                                                 trigger={
-                                                    <div>    
+                                                    <div className='flex items-center flex-wrap gap-2'>    
                                                         <h4 className='cursor-pointer underline'>
-                                                            Промежуточная аттестация - 
+                                                            Промежуточная аттестация  
                                                         </h4>
                                                         <Badge className={cn(getStudentMarkColor(student.midtermResult))}>{StudentMarkTexts[student.midtermResult!]}</Badge>
                                                     </div>
@@ -198,9 +198,9 @@ export const CourceDetailedInfo = ({course} : CourceDetailedInfoProps) => {
                                         <div className='flex-auto'>
                                             <EditStudentMarkDialog 
                                                 trigger={
-                                                    <div>   
+                                                    <div className='flex items-center flex-wrap gap-2'>   
                                                         <h4 className='cursor-pointer underline'>
-                                                            Финальная аттестация - 
+                                                            Финальная аттестация  
                                                         </h4>
                                                         <Badge className={cn(getStudentMarkColor(student.finalResult))}>{StudentMarkTexts[student.finalResult!]}</Badge>
                                                     </div>

@@ -201,7 +201,7 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
                                 items={convertUsersToComboboxItems(users.data)}
                                 onSelect={handleUserSelect}
                                 value={selectedUser}
-                                className='w-96'
+                                className='flex w-full'
                               />
                             )}
                           </div>

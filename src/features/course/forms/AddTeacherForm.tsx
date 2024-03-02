@@ -21,7 +21,7 @@ import { useAddTeacherForm } from '../hooks/useAddTeacherForm';
             <div className="flex-1 space-y-3">
             <FormField
                     control={form.control}
-                    name="teacherId"
+                    name="userId"
                     render={({ field }) => (
                     <FormItem>
                         <FormLabel>
@@ -35,14 +35,14 @@ import { useAddTeacherForm } from '../hooks/useAddTeacherForm';
                                 items={convertUsersToComboboxItems(users.data)}
                                 onSelect={handleUserSelect}
                                 value={selectedUser}
-                                className='w-96'
+                                className='w-full'
                               />
                             )}
                           </div>
                         </FormControl>
                         <FormMessage>
-                        {form.formState?.errors?.teacherId && (
-                            <span>{form.formState.errors.teacherId.message}</span>
+                        {form.formState?.errors?.userId && (
+                            <span>{form.formState.errors.userId.message}</span>
                         )}
                         </FormMessage>
                     </FormItem>
