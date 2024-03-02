@@ -5,6 +5,7 @@ import { Button } from '@/components/ui';
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated, selectUserEmail, selectUserRoles } from '@/utils/AuthSlice/slice';
 import { useHeader } from './hooks/useHeader';
+import { MobileHeader } from '../MobileHeader/MobileHeader';
 
 export const Header = () => {
 const isAuth = useSelector(selectIsAuthenticated);
@@ -15,14 +16,14 @@ const links = getNavigationLinksByUserRole(role);
 
 return (
   <header className='flex md:px-10 py-4 border-b-2 px-4 justify-between'>
-    <div className='flex'>
+    <div className='flex w-full md:w-auto justify-between'>
       <Link to='' className='flex'>
-        <div className='flex font-bold items-center mr-6'>
+        <div className='flex font-bold items-center mr-3'>
           <Logo />
-          Campus Courses
+          <span>Campus Courses</span>
         </div> 
       </Link> 
-      <nav className='flex items-center gap-6 text-sm flex-auto justify-between'>
+      <nav className='hidden items-center gap-6 text-sm flex-auto justify-between md:flex'>
         {isAuth && (
           links.map((link, index) => (
             <div>
@@ -37,40 +38,43 @@ return (
           ))
         )}
       </nav>
-
+      <MobileHeader />
     </div>
-  {!isAuth && (
-      <div className='space-x-2'>
-        <Button>
-          <Link
-          to={'/registration'}
-          >
-            <span>Зарегестрироваться</span>
-          </Link>
-        </Button>
-        <Button>
-          <Link
-          to={'/login'}
-          >
-            <span>Войти</span>
-          </Link>
-        </Button>
-      </div>
-    )}
-     {isAuth && (
-      <div className='space-x-2'>
-        <Button>
-          <Link
-          to={'/profile'}
-          >
-            <span>{email}</span>
-          </Link>
-        </Button>
-        <Button onClick={handleLogout}>
-          <span>Выйти</span>
-        </Button>
-      </div>
-    )}
+    <div className='hidden md:block'>
+      {!isAuth && (
+        <div className='space-x-2 flex'>
+          <Button>
+            <Link
+            to={'/registration'}
+            >
+              <span>Зарегестрироваться</span>
+            </Link>
+          </Button>
+          <Button>
+            <Link
+            to={'/login'}
+            >
+              <span>Войти</span>
+            </Link>
+          </Button>
+        </div>
+      )}
+      {isAuth && (
+        <div className='space-x-2 flex'>
+          <Button>
+            <Link
+            to={'/profile'}
+            >
+              <span>{email}</span>
+            </Link>
+          </Button>
+          <Button onClick={handleLogout}>
+            <span>Выйти</span>
+          </Button>
+        </div>
+      )}
+    </div>
+
   </header>
   )
 }
