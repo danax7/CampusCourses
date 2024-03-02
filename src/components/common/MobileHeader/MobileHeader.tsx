@@ -81,7 +81,7 @@ export const MobileHeader = () => {
                                 <span>{email}</span>
                             </Link>
                             </Button>
-                            <Button onClick={handleLogout} onClick={() => setSheetOpen(false)}>
+                            <Button onClick={handleLogout}>
                             <span>Выйти</span>
                         </Button>
                     </div>

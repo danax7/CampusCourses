@@ -20,7 +20,7 @@ export const CampusCourseCard = ({course}: CampusCourseCardProps ) => {
         <Card key={course.id}>
         <CardHeader>
             <CardTitle className='flex justify-between'>
-                <div className='flex flex-col space-y-3'>
+                <div className='flex flex-col space-y-3 m-1'>
                     <Link to={`/courses/${course.id}`}>
                         <span>{course.name}</span>
                     </Link>
@@ -29,7 +29,7 @@ export const CampusCourseCard = ({course}: CampusCourseCardProps ) => {
                         Удалить курс
                         </Button>}
                 </div>
-                <span className={cn(getStatusColor(course.status))}>{statusTexts[course.status]}</span>
+                <span className={cn('text-xl', getStatusColor(course.status))}>{statusTexts[course.status]}</span>
             </CardTitle>
         <CardDescription>
                 <p>Мест всего - {course.maximumStudentsCount}</p>
