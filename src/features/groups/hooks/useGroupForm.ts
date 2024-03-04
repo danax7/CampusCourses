@@ -37,7 +37,7 @@ export const useGroupForm = ({actionType, group}:useGroupFormProps) => {
     if (actionType === 'add') {
       const res = await postCreateGroup.mutateAsync(values);
       if (res.data) {
-        queryClient.invalidateQueries('getGroups');
+        queryClient.invalidateQueries({queryKey: ['getGroups']});
         toast.info('Группа успешно создана', {
           cancel: { label: 'Close' }
         });
@@ -46,7 +46,7 @@ export const useGroupForm = ({actionType, group}:useGroupFormProps) => {
    
       const res = await putGroupEdit.mutateAsync({ id: group?.id, data: values });
       if (res.data) {
-        queryClient.invalidateQueries('getGroups');
+        queryClient.invalidateQueries({queryKey: ['getGroups']});
         toast.info('Группа успешно отредактирована', {
           cancel: { label: 'Close' }
         });

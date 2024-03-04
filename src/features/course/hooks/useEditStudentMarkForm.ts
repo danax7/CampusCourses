@@ -29,7 +29,7 @@ export const useEditStudentMarkForm = ({studentId, markType}: useEditStudentMark
     const onSubmit = studentMarkEditForm.handleSubmit(async (values) => {
             const res = await postEditStudentMark.mutateAsync({ courseId: courseId , studentId: studentId, data: values });
         if (res.data) {
-                queryClient.invalidateQueries('groupCourseDetailedInfo');
+                queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
                 toast.info('Результат промежуточной аттестации успешно отредактирован', {
                     cancel: { label: 'Close' }
             });

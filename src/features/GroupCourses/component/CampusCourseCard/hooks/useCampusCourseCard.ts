@@ -14,7 +14,7 @@ export const useCampusCourseCard = ( {courseId} : UseCampusCourseCardProps) => {
     setIsDeleting(true); 
     try {
       await deleteCourse({params: { id: courseId }});
-      queryClient.invalidateQueries(['groupCourses', courseId]); 
+      queryClient.invalidateQueries({queryKey: ['groupCourses', courseId]});
     } finally {
       setIsDeleting(false);
     }

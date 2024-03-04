@@ -13,7 +13,7 @@ export const useCourseDetailedInfo = (courseId: string) => {
     const res = await postSignUpForCourse.mutateAsync({ id: courseId });
 
     if (res.data) {
-      queryClient.invalidateQueries('groupCourseDetailedInfo');
+      queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
       toast.info('Вы успешно вошли на курс', {
         cancel: { label: 'Close' }
       });
@@ -24,7 +24,7 @@ export const useCourseDetailedInfo = (courseId: string) => {
     const res = await postEditStudentStatus.mutateAsync({ courseId: courseId, studentId: studentId, data: {status: editStatus} });
  
     if (res.data) {
-      queryClient.invalidateQueries('groupCourseDetailedInfo');
+      queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
       toast.info('Статус пользователя успешно изменен', {
         cancel: { label: 'Close' }
       });

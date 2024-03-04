@@ -32,7 +32,7 @@ export const useAddTeacherForm = () => {
       const res = await postAddCourseTeacher.mutateAsync({ courseId: courseId, data: values });
    
       if (res.data) {
-        queryClient.invalidateQueries(['groupCourseDetailedInfo']); 
+        queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
         toast.info('Преподаватель успешно добавлен', {
           cancel: { label: 'Close' }
         });

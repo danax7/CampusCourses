@@ -39,7 +39,7 @@ export const MobileHeader = () => {
                 <SheetDescription className='h-full flex flex-col'>
                 <nav className='items-center text-sm flex-auto justify-between flex-col space-y-4 my-6 '>
                     {isAuth && (
-                        links.map((link, index) => (
+                        links!.map((link, index) => (
                             <div>
                             <Link
                                 to={link.href}

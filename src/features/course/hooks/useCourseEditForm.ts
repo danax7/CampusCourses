@@ -31,7 +31,7 @@ export const useCourseEditForm = ({requirements, annotations}: useCourseEditForm
         const res = await putEditStatus.mutateAsync({ id: courseId , data: values });
 
         if (res.data) {
-                queryClient.invalidateQueries('groupCourseDetailedInfo');
+            queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
                 toast.info('Инфомация о группе успешно отредактирована', {
                     cancel: { label: 'Close' }
             });

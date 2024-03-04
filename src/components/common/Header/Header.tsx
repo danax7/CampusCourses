@@ -25,7 +25,7 @@ return (
       </Link> 
       <nav className='hidden items-center gap-6 text-sm flex-auto justify-between md:flex'>
         {isAuth && (
-          links.map((link, index) => (
+          links!.map((link, index) => (
             <div>
               <Link
                 to={link.href}

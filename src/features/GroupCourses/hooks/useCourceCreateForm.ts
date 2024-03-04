@@ -46,7 +46,7 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
       const res = await postCreateCourse.mutateAsync({ groupId: groupId, data: values });
    
       if (res.data) {
-        queryClient.invalidateQueries('groupCourses');
+        queryClient.invalidateQueries({queryKey: ['groupCourses']});
         toast.info('Курс успешно создан', {
           cancel: { label: 'Close' }
         });

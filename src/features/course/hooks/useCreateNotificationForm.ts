@@ -25,7 +25,7 @@ export const useCreateNotificationForm = () => {
 
         const res = await postCreateNotification.mutateAsync({ id: courseId , data: { ...values, isImportant } });
         if (res.data) {
-          queryClient.invalidateQueries('groupCourseDetailedInfo');
+          queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
           toast.info('Уведомление успешно создано', {
             cancel: { label: 'Close' }
           });

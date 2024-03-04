@@ -19,7 +19,7 @@ export const GroupInfoCard = ({group, isAdmin}: GroupInfoCardProps ) => {
     setIsDeleting(true); 
     try {
       await deleteGroup({params: { id: group.id }});
-      queryClient.invalidateQueries('groupCourses'); 
+      queryClient.invalidateQueries({queryKey: ['groupCourses']});
     } finally {
       setIsDeleting(false);
     }
