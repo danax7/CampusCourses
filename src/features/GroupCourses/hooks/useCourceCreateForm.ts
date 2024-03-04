@@ -11,10 +11,10 @@ import { useParams } from 'react-router-dom';
 
 interface useCourseCreateFormProps {
   actionType: 'add' | 'edit';
-  cource?: CampusCourseDto;
+  // cource?: CampusCourseDto;
 }
 
-export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormProps) => {
+export const useCourseCreateForm = ({actionType}: useCourseCreateFormProps) => {
   const { groupId } = useParams<{ groupId: string }>();
   const [selectedUser, setSelectedUser] = useState('');
   const queryClient = useQueryClient();
@@ -43,7 +43,7 @@ export const useCourseCreateForm = ({actionType, cource}: useCourseCreateFormPro
   const onSubmit = courceCreateForm.handleSubmit(async (values) => {
 
     if (actionType === 'add') {
-      const res = await postCreateCourse.mutateAsync({ groupId: groupId, data: values });
+      const res = await postCreateCourse.mutateAsync({ groupId: groupId!, data: values });
    
       if (res.data) {
         queryClient.invalidateQueries({queryKey: ['groupCourses']});

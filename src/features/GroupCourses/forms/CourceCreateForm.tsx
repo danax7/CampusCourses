@@ -19,8 +19,8 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
     cource?: CampusCourseDto;
   }
   
-  export const CourceCreateForm = ({ actionType, cource }: CourceCreateProps) => {
-    const { state, form, functions, users, selectedUser, handleUserSelect } = useCourseCreateForm({actionType, cource});
+  export const CourceCreateForm = ({ actionType }: CourceCreateProps) => {
+    const { state, form, functions, users, selectedUser, handleUserSelect } = useCourseCreateForm({actionType});
 
     // const users = getUsers.data
     // console.log(getUsers.data)

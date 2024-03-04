@@ -29,7 +29,7 @@ export const useAddTeacherForm = () => {
   const postAddCourseTeacher = usePostAddTeacherMutation();
 
   const onSubmit = addTeacherForm.handleSubmit(async (values) => {
-      const res = await postAddCourseTeacher.mutateAsync({ courseId: courseId, data: values });
+      const res = await postAddCourseTeacher.mutateAsync({ courseId: courseId!, data: values });
    
       if (res.data) {
         queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});

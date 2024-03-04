@@ -25,14 +25,15 @@ export const useCourseStatusEditForm = ({status}: useCourseStatusEditFormProps) 
     const postEditCourseStatus = usePostEditCourseStatusMutation();
 
     const onSubmit = courseStatusEditForm.handleSubmit(async (values) => {
-            const res = await postEditCourseStatus.mutateAsync({ id: courseId , data: values });
-        if (res.data) {
-          queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
-                toast.info('Статус успешно отредактирован', {
-                    cancel: { label: 'Close' }
-            });
-        }
+      const res = await postEditCourseStatus.mutateAsync({ id: courseId!, data: values });
+      if (res) {
+        queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
+        toast.info('Статус успешно отредактирован', {
+          cancel: { label: 'Close' }
+        });
+      }
     });
+    
 
   return {
     state: {

@@ -1,10 +1,7 @@
 'use client';
 
-import { XIcon } from 'lucide-react';
-
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
