@@ -1,5 +1,10 @@
 import React from 'react';
-import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
@@ -20,14 +25,14 @@ export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
             const responseError = error as ResponseError;
 
             if (responseError?.response?.status === 401) {
-                localStorage.clear();
-                navigate('/login');
+              localStorage.clear();
+              navigate('/login');
             }
 
             toast.error(responseError.response.data.message, {
-              cancel: { label: 'Close' }
+              cancel: { label: 'Close' },
             });
-          }
+          },
         }),
         mutationCache: new MutationCache({
           onError: (error) => {
@@ -39,12 +44,12 @@ export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
             }
 
             toast.error(responseError?.response?.data.message, {
-              cancel: { label: 'Close' }
+              cancel: { label: 'Close' },
             });
-          }
-        })
+          },
+        }),
       }),
-    []
+    [],
   );
 
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;

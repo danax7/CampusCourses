@@ -6,25 +6,24 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 interface GroupInfoCardProps {
-    group: GroupLiteDto;
-    isAdmin: boolean
+  group: GroupLiteDto;
+  isAdmin: boolean;
 }
 
-export const GroupInfoCard = ({group, isAdmin}: GroupInfoCardProps ) => {
+export const GroupInfoCard = ({ group, isAdmin }: GroupInfoCardProps) => {
   const queryClient = useQueryClient();
 
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteGroup = async () => {
-    setIsDeleting(true); 
+    setIsDeleting(true);
     try {
-      await deleteGroup({params: { id: group.id }});
-      queryClient.invalidateQueries({queryKey: ['groupCourses']});
+      await deleteGroup({ params: { id: group.id } });
+      queryClient.invalidateQueries({ queryKey: ['groupCourses'] });
     } finally {
       setIsDeleting(false);
     }
   };
-
 
   return (
     <div className='flex items-center border-2 p-2 rounded-md'>
@@ -35,12 +34,8 @@ export const GroupInfoCard = ({group, isAdmin}: GroupInfoCardProps ) => {
       </div>
       {isAdmin && (
         <div className='space-x-2 flex'>
-          <GroupCreateEditDialog 
-            trigger={
-              <Button variant='secondary'>
-                Редактировать
-              </Button>
-            }
+          <GroupCreateEditDialog
+            trigger={<Button variant='secondary'>Редактировать</Button>}
             group={group}
             actionType='edit'
           />
@@ -51,4 +46,4 @@ export const GroupInfoCard = ({group, isAdmin}: GroupInfoCardProps ) => {
       )}
     </div>
   );
-}
+};

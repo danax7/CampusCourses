@@ -15,17 +15,19 @@ interface GroupCreateEditDialogProps {
   group?: GroupLiteDto;
 }
 
-export const GroupCreateEditDialog = ({ trigger, actionType, group }: GroupCreateEditDialogProps) => {
-//   const { functions } = useEmployeeDialog();
+export const GroupCreateEditDialog = ({
+  trigger,
+  actionType,
+  group,
+}: GroupCreateEditDialogProps) => {
+  //   const { functions } = useEmployeeDialog();
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className='flex h-fit w-11/12 max-w-[500px] flex-col rounded-lg smx:max-h-[90%]'>
         <DialogHeader>
           {actionType === 'add' && (
-            <DialogTitle className='space-y-2'>
-              Добавление группы
-            </DialogTitle>
+            <DialogTitle className='space-y-2'>Добавление группы</DialogTitle>
           )}
           {actionType === 'edit' && (
             <DialogTitle className='space-y-2'>

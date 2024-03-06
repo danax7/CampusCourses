@@ -4,15 +4,20 @@ import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { usePostEditStudentMarkMutation } from '@/utils/api/hooks/usePostEditStudentMarkMutation';
-import { EditStudentMarkSchema, editStudentMarkSchema } from '../constants/editStudentMarkSchema';
-
+import {
+  EditStudentMarkSchema,
+  editStudentMarkSchema,
+} from '../constants/editStudentMarkSchema';
 
 interface useEditStudentMarkFormProps {
   studentId: string;
-  markType: string
+  markType: string;
 }
 
-export const useEditStudentMarkForm = ({studentId, markType}: useEditStudentMarkFormProps) => {
+export const useEditStudentMarkForm = ({
+  studentId,
+  markType,
+}: useEditStudentMarkFormProps) => {
   const queryClient = useQueryClient();
   const { courseId } = useParams<{ courseId: string }>();
 
@@ -20,28 +25,31 @@ export const useEditStudentMarkForm = ({studentId, markType}: useEditStudentMark
     resolver: zodResolver(editStudentMarkSchema),
     defaultValues: {
       mark: 'Passed',
-      markType: markType
+      markType: markType,
+    },
+  });
+
+  const postEditStudentMark = usePostEditStudentMarkMutation();
+
+  const onSubmit = studentMarkEditForm.handleSubmit(async (values) => {
+    const res = await postEditStudentMark.mutateAsync({
+      courseId: courseId!,
+      studentId: studentId,
+      data: values,
+    });
+    if (res.data) {
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
+      toast.info('Результат промежуточной аттестации успешно отредактирован', {
+        cancel: { label: 'Close' },
+      });
     }
   });
 
-    const postEditStudentMark = usePostEditStudentMarkMutation();
-
-    const onSubmit = studentMarkEditForm.handleSubmit(async (values) => {
-            const res = await postEditStudentMark.mutateAsync({ courseId: courseId! , studentId: studentId, data: values });
-        if (res.data) {
-                queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
-                toast.info('Результат промежуточной аттестации успешно отредактирован', {
-                    cancel: { label: 'Close' }
-            });
-        }
-    });
-    
-
   return {
     state: {
-      isLoading: postEditStudentMark.isPending
+      isLoading: postEditStudentMark.isPending,
     },
     form: studentMarkEditForm,
-    functions: { onSubmit }
+    functions: { onSubmit },
   };
 };

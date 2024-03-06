@@ -6,43 +6,46 @@ import { useParams } from 'react-router-dom';
 import { CourseEditSchema, courseEditSchema } from '../constants/courseEditSchema';
 import { usePutEditCourseMutation } from '@/utils/api/hooks/usePutEditCourseMutation';
 
-
 interface useCourseEditFormProps {
   requirements: string;
   annotations: string;
 }
 
-export const useCourseEditForm = ({requirements, annotations}: useCourseEditFormProps) => {
-    const queryClient = useQueryClient();
-    const { courseId } = useParams<{ courseId: string }>();
+export const useCourseEditForm = ({
+  requirements,
+  annotations,
+}: useCourseEditFormProps) => {
+  const queryClient = useQueryClient();
+  const { courseId } = useParams<{ courseId: string }>();
 
-    const courseEditForm = useForm<CourseEditSchema>({
-        resolver: zodResolver(courseEditSchema),
-        defaultValues: {
-            annotations: annotations || '',
-            requirements: requirements || '',
+  const courseEditForm = useForm<CourseEditSchema>({
+    resolver: zodResolver(courseEditSchema),
+    defaultValues: {
+      annotations: annotations || '',
+      requirements: requirements || '',
+    },
+  });
 
-        }
-    });
+  const putEditStatus = usePutEditCourseMutation();
 
-    const putEditStatus = usePutEditCourseMutation();
+  const onSubmit = courseEditForm.handleSubmit(async (values) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    const res = await putEditStatus.mutateAsync({ id: courseId, data: values });
 
-    const onSubmit = courseEditForm.handleSubmit(async (values) => {
-        const res = await putEditStatus.mutateAsync({ id: courseId , data: values });
+    if (res.data) {
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
+      toast.info('Инфомация о группе успешно отредактирована', {
+        cancel: { label: 'Close' },
+      });
+    }
+  });
 
-        if (res.data) {
-            queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
-                toast.info('Инфомация о группе успешно отредактирована', {
-                    cancel: { label: 'Close' }
-            });
-        }
-    });
-
-    return {
-        state: {
-            isLoading: putEditStatus.isPending
-        },
-        form: courseEditForm,
-        functions: { onSubmit }
-    };
+  return {
+    state: {
+      isLoading: putEditStatus.isPending,
+    },
+    form: courseEditForm,
+    functions: { onSubmit },
+  };
 };

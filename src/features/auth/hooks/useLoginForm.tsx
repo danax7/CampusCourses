@@ -17,8 +17,8 @@ export const useLoginForm = () => {
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   });
 
   const postLogin = usePostLoginMutation();
@@ -26,10 +26,10 @@ export const useLoginForm = () => {
   const onSubmit = loginForm.handleSubmit(async (values) => {
     const res = await postLogin.mutateAsync(values);
 
-    localStorage.setItem('email', values.email)
-    dispatch(setToken(res.data.token))
+    localStorage.setItem('email', values.email);
+    dispatch(setToken(res.data.token));
 
-    if (res.data){
+    if (res.data) {
       const roles = (await getRoles()).data;
       localStorage.setItem('roles', JSON.stringify(roles));
       dispatch(setRoles(roles));
@@ -40,9 +40,9 @@ export const useLoginForm = () => {
 
   return {
     state: {
-      isLoading: postLogin.isPending
+      isLoading: postLogin.isPending,
     },
     form: loginForm,
-    functions: { onSubmit }
+    functions: { onSubmit },
   };
 };

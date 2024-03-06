@@ -3,7 +3,7 @@ import { Toaster } from 'sonner';
 import { Header } from './components/common/Header/Header';
 import { QueryProvider } from './utils/contexts/QueryProvider';
 import { store } from './utils/store/store';
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
 
 const TOASTER_DURATION = 5000;
 
@@ -16,7 +16,7 @@ export const App = () => {
           <Outlet />
           <Toaster duration={TOASTER_DURATION} />
         </div>
-       </QueryProvider>
+      </QueryProvider>
     </Provider>
-  )
-}
+  );
+};

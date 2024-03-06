@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 export const useCourseDetailedInfo = (courseId: string) => {
   const postSignUpForCourse = usePostSignUpForCourseMutation();
-  const postEditStudentStatus= usePostEditStudentStatusMutation();
+  const postEditStudentStatus = usePostEditStudentStatusMutation();
 
   const queryClient = useQueryClient();
 
@@ -13,20 +13,27 @@ export const useCourseDetailedInfo = (courseId: string) => {
     const res = await postSignUpForCourse.mutateAsync({ id: courseId });
 
     if (res.data) {
-      queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
       toast.info('Вы успешно вошли на курс', {
-        cancel: { label: 'Close' }
+        cancel: { label: 'Close' },
       });
     }
   };
 
-  const handleChangeUserStatus = async (studentId: string, editStatus: StudentStatuses) => {
-    const res = await postEditStudentStatus.mutateAsync({ courseId: courseId, studentId: studentId, data: {status: editStatus} });
- 
+  const handleChangeUserStatus = async (
+    studentId: string,
+    editStatus: StudentStatuses,
+  ) => {
+    const res = await postEditStudentStatus.mutateAsync({
+      courseId: courseId,
+      studentId: studentId,
+      data: { status: editStatus },
+    });
+
     if (res.data) {
-      queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
       toast.info('Статус пользователя успешно изменен', {
-        cancel: { label: 'Close' }
+        cancel: { label: 'Close' },
       });
     }
   };
@@ -35,6 +42,6 @@ export const useCourseDetailedInfo = (courseId: string) => {
     handleSignUpForCourse,
     isLoading: postSignUpForCourse.isPending,
     isEditStatusLoading: postEditStudentStatus.isPending,
-    handleChangeUserStatus
+    handleChangeUserStatus,
   };
 };

@@ -6,7 +6,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input
+  Input,
 } from '@/components/ui';
 import { useGroupForm } from '../hooks/useGroupForm';
 
@@ -16,25 +16,20 @@ interface EmployeeFormProps {
 }
 
 export const GroupForm = ({ actionType, group }: EmployeeFormProps) => {
-  const { state, form, functions } = useGroupForm({actionType, group});
+  const { state, form, functions } = useGroupForm({ actionType, group });
   return (
     <Form {...form}>
-      <form onSubmit={functions.onSubmit} className="flex w-full flex-col items-end">
-        <div className="mb-7 flex w-full gap-5 smx:flex-col">
-          <div className="flex-1 space-y-3">
+      <form onSubmit={functions.onSubmit} className='flex w-full flex-col items-end'>
+        <div className='mb-7 flex w-full gap-5 smx:flex-col'>
+          <div className='flex-1 space-y-3'>
             <FormField
               control={form.control}
-              name="name"
+              name='name'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Название группы
-                  </FormLabel>
+                  <FormLabel>Название группы</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Введите название"
-                    />
+                    <Input {...field} placeholder='Введите название' />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.name && (
@@ -47,11 +42,11 @@ export const GroupForm = ({ actionType, group }: EmployeeFormProps) => {
           </div>
         </div>
         <Button
-          type="submit"
-          variant="default"
-          size="lg"
+          type='submit'
+          variant='default'
+          size='lg'
           loading={state.isLoading}
-          className="w-full"
+          className='w-full'
         >
           {actionType === 'add' && <span>Добавить</span>}
           {actionType === 'edit' && <span>Сохранить</span>}

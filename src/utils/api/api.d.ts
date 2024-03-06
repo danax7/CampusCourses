@@ -21,7 +21,10 @@ interface QuerySettings<Func = unknown> {
   >;
 }
 
-type ResponseError = Error & { config: RequestConfig; response: InterceptorResponseResult };
+type ResponseError = Error & {
+  config: RequestConfig;
+  response: InterceptorResponseResult;
+};
 
 type RequestParams<Params = undefined> = Params extends undefined
   ? { config?: RequestOptions }
@@ -57,10 +60,10 @@ interface TokenResponse {
 
 type UserRole = 'teacherAndStudent' | 'teacher' | 'student' | 'user' | 'guest';
 
-interface UserRolesResponse{
-  isTeacher: boolean,
-  isStudent: boolean,
-  isAdmin: boolean
+interface UserRolesResponse {
+  isTeacher: boolean;
+  isStudent: boolean;
+  isAdmin: boolean;
 }
 
 interface GroupLiteDto {
@@ -72,28 +75,28 @@ interface GroupCreateDto {
   name: string;
 }
 
-interface CampusCourseDto{
+interface CampusCourseDto {
   id: string;
   name: string;
   startYear: number;
   maximumStudentsCount: number;
   remainingSlotsCount: number;
   status: СourseStatus;
-  semester: string
+  semester: string;
 }
 
-type СourseStatus = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished'
-type Semester = 'Autumn' | 'Spring'
-type StudentStatuses = 'InQueue' | 'Accepted' |'Declined'
+type СourseStatus = 'Created' | 'OpenForAssigning' | 'Started' | 'Finished';
+type Semester = 'Autumn' | 'Spring';
+type StudentStatuses = 'InQueue' | 'Accepted' | 'Declined';
 
 interface CampusCourseCreateDto {
   name: string;
   startYear: number;
   maximumStudentsCount: number;
   semester: string;
-  requirements: string,
-  annotations: string,
-  mainTeacherId: string
+  requirements: string;
+  annotations: string;
+  mainTeacherId: string;
 }
 
 interface TeacherDto {
@@ -107,21 +110,21 @@ interface TeacherDto {
 //   email: string;
 // }
 
-type MarkType = 'Midterm' | 'Final'
-type StudentMarks = 'NotDefined' | 'Passed' | 'Failed'
+type MarkType = 'Midterm' | 'Final';
+type StudentMarks = 'NotDefined' | 'Passed' | 'Failed';
 
 interface UserDto {
-  id:string;
+  id: string;
   name: string;
   email: string;
   status: StudentStatuses;
   midtermResult?: StudentMarks;
-  finalResult?: StudentMarks
+  finalResult?: StudentMarks;
 }
 
 interface EditCourseStudentMarkDto {
   markType: string;
-  mark: string
+  mark: string;
 }
 
 interface NotificationDto {
@@ -129,18 +132,18 @@ interface NotificationDto {
   isImportant: string;
 }
 
-interface CampusCourseFullDto extends CampusCourseDto{
+interface CampusCourseFullDto extends CampusCourseDto {
   maximumStudentsCount: number;
   studentsEnrolledCount: number;
   studentsInQueueCount: number;
-  requirements: string,
-  annotations: string,
-  students: UserDto[],
-  teachers: TeacherDto[],
-  notifications: NotificationDto[]
+  requirements: string;
+  annotations: string;
+  students: UserDto[];
+  teachers: TeacherDto[];
+  notifications: NotificationDto[];
 }
 
-interface CampusCourseCreateDtoRequest extends CampusCourseCreateDto{
+interface CampusCourseCreateDtoRequest extends CampusCourseCreateDto {
   groupId: string;
 }
 
@@ -150,7 +153,7 @@ interface SearchUserDto {
 }
 
 interface AddTeacherDto {
-  userId:string;
+  userId: string;
 }
 
 interface EditStudentStatusDto {

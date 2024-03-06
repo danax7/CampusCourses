@@ -9,7 +9,6 @@ import {
   Input,
 } from '@/components/ui';
 
-
 import { useLoginForm } from './hooks/useLoginForm';
 
 export const LoginForm = () => {
@@ -23,15 +22,9 @@ export const LoginForm = () => {
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Email
-              </FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  disabled={state.isLoading}
-                  placeholder="Email"
-                  {...field}
-                />
+                <Input disabled={state.isLoading} placeholder='Email' {...field} />
               </FormControl>
               <FormMessage>
                 {form.formState?.errors?.password && (
@@ -46,15 +39,13 @@ export const LoginForm = () => {
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Пароль
-              </FormLabel>
+              <FormLabel>Пароль</FormLabel>
               <FormControl>
-                  <Input
-                    disabled={state.isLoading}
-                    placeholder="******"
-                    {...field}
-                    type='password'
+                <Input
+                  disabled={state.isLoading}
+                  placeholder='******'
+                  {...field}
+                  type='password'
                 />
               </FormControl>
               <FormMessage>
@@ -65,12 +56,7 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button
-          type='submit'
-          size='lg'
-          className='w-full'
-          loading={state.isLoading}
-        >
+        <Button type='submit' size='lg' className='w-full' loading={state.isLoading}>
           Войти
         </Button>
       </form>

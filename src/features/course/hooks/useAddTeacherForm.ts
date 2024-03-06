@@ -17,36 +17,39 @@ export const useAddTeacherForm = () => {
   const addTeacherForm = useForm<AddTeacherSchema>({
     resolver: zodResolver(addTeacherSchema),
     defaultValues: {
-        userId:''
-    }
+      userId: '',
+    },
   });
 
   const handleUserSelect = (value: string | undefined) => {
-    addTeacherForm.setValue('userId', value!)
+    addTeacherForm.setValue('userId', value!);
     setSelectedUser(value || '');
   };
 
   const postAddCourseTeacher = usePostAddTeacherMutation();
 
   const onSubmit = addTeacherForm.handleSubmit(async (values) => {
-      const res = await postAddCourseTeacher.mutateAsync({ courseId: courseId!, data: values });
-   
-      if (res.data) {
-        queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
-        toast.info('Преподаватель успешно добавлен', {
-          cancel: { label: 'Close' }
-        });
-      }
+    const res = await postAddCourseTeacher.mutateAsync({
+      courseId: courseId!,
+      data: values,
+    });
+
+    if (res.data) {
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
+      toast.info('Преподаватель успешно добавлен', {
+        cancel: { label: 'Close' },
+      });
+    }
   });
 
   return {
     state: {
-      isLoading: postAddCourseTeacher.isPending
+      isLoading: postAddCourseTeacher.isPending,
     },
     form: addTeacherForm,
     functions: { onSubmit },
     handleUserSelect,
     selectedUser,
-    users: getUsers.data
+    users: getUsers.data,
   };
 };

@@ -3,7 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { NotificationCreateSchema, notificationCreateSchema } from '../constants/notificationCreateSchema';
+import {
+  NotificationCreateSchema,
+  notificationCreateSchema,
+} from '../constants/notificationCreateSchema';
 import { usePostCreateNotificationMutation } from '@/utils/api/hooks/usePostCreateNotificationMutation';
 
 export const useCreateNotificationForm = () => {
@@ -14,29 +17,33 @@ export const useCreateNotificationForm = () => {
     resolver: zodResolver(notificationCreateSchema),
     defaultValues: {
       text: '',
-      isImportant: 'false'
+      isImportant: 'false',
+    },
+  });
+
+  const postCreateNotification = usePostCreateNotificationMutation();
+
+  const onSubmit = courseStatusEditForm.handleSubmit(async (values) => {
+    const isImportant = values.isImportant === 'true';
+    const res = await postCreateNotification.mutateAsync({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      id: courseId,
+      data: { ...values, isImportant },
+    });
+    if (res.data) {
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
+      toast.info('Уведомление успешно создано', {
+        cancel: { label: 'Close' },
+      });
     }
-    });
+  });
 
-    const postCreateNotification = usePostCreateNotificationMutation();
-
-    const onSubmit = courseStatusEditForm.handleSubmit(async (values) => {
-        const isImportant = values.isImportant === 'true';
-
-        const res = await postCreateNotification.mutateAsync({ id: courseId , data: { ...values, isImportant } });
-        if (res.data) {
-          queryClient.invalidateQueries({queryKey: ['groupCourseDetailedInfo']});
-          toast.info('Уведомление успешно создано', {
-            cancel: { label: 'Close' }
-          });
-        }
-    });
-    
-    return {
-        state: {
-        isLoading: postCreateNotification.isPending
-        },
-        form: courseStatusEditForm,
-        functions: { onSubmit }
-    };
+  return {
+    state: {
+      isLoading: postCreateNotification.isPending,
+    },
+    form: courseStatusEditForm,
+    functions: { onSubmit },
+  };
 };

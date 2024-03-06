@@ -6,15 +6,13 @@ import { getProfile } from '@/utils/api/requests/user/profile/get';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
-
 export const useProfileForm = () => {
-
   const profileEditForm = useForm<ProfileEditSchema>({
     resolver: zodResolver(profileEditSchema),
     defaultValues: {
-        fullName: '',
-        birthDate: '',
-    }
+      fullName: '',
+      birthDate: '',
+    },
   });
 
   const putProfileEdit = usePutProfileEditMutation();
@@ -23,29 +21,27 @@ export const useProfileForm = () => {
     const { birthDate, ...rest } = values;
     const isoBirthDate = new Date(birthDate).toISOString();
     await putProfileEdit.mutateAsync({ ...rest, birthDate: isoBirthDate });
-        toast.info('Профиль успешно обновлен', {
-          cancel: { label: 'Close' }
-        });
-      
+    toast.info('Профиль успешно обновлен', {
+      cancel: { label: 'Close' },
+    });
   });
-  
-    const setUserProfile = async () => {
-      const res = await getProfile();
-      const { fullName, birthDate } = res.data;
-      profileEditForm.setValue('fullName', fullName || '');
-      profileEditForm.setValue('birthDate', birthDate?.substring(0, 10) || '');
-    };
 
-    useEffect(() => {
-        setUserProfile();
-    }, []);
+  const setUserProfile = async () => {
+    const res = await getProfile();
+    const { fullName, birthDate } = res.data;
+    profileEditForm.setValue('fullName', fullName || '');
+    profileEditForm.setValue('birthDate', birthDate?.substring(0, 10) || '');
+  };
 
+  useEffect(() => {
+    setUserProfile();
+  }, []);
 
   return {
     state: {
-        isLoading: putProfileEdit.isPending
+      isLoading: putProfileEdit.isPending,
     },
     form: profileEditForm,
-    functions: { onSubmit }
+    functions: { onSubmit },
   };
 };

@@ -9,18 +9,18 @@ export const api = axios.create({
 
 api.interceptors.response.use(
   (response) => {
-      return response;
+    return response;
   },
   (error) => {
-      if (error.response.status === 500) {
-        toast.error(`Ошибка сервера:${error.response.data.message}`, {
-          cancel: { label: 'Close' }
-        });
-      }
-      if (error.response.status === 401) {
-          localStorage.clear();
-          window.location.href = "/login";
-      }
-      return Promise.reject(error);
-  }
+    if (error.response.status === 500) {
+      toast.error(`Ошибка сервера:${error.response.data.message}`, {
+        cancel: { label: 'Close' },
+      });
+    }
+    if (error.response.status === 401) {
+      localStorage.clear();
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  },
 );

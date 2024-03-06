@@ -18,10 +18,9 @@ const initialState: AuthState = {
   roles: parsedRoles || {
     isTeacher: false,
     isStudent: false,
-    isAdmin: false
-  }
+    isAdmin: false,
+  },
 };
-
 
 const authSlice = createSlice({
   name: 'auth',
@@ -41,8 +40,8 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       localStorage.clear();
-    }
-  }
+    },
+  },
 });
 
 export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;

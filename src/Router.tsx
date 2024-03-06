@@ -1,15 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
-import { App } from "./App";
-import { LoginPage } from "./pages/LoginPage/LoginPage";
-import { RegistartionPage } from "./pages/RegistartionPage/RegistrationPage";
-import { GroupsPage } from "./pages/GroupsPage/GroupsPage";
-import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
-import { MainPage } from "./pages/MainPage/MainPage";
-import { GroupPage } from "./pages/GroupPage/GroupPage";
-import { TeachCoursesPage } from "./pages/TeachCoursesPage/TeachCoursesPage";
-import { CoursePage } from "./pages/CoursePage/CoursePage";
-import { MyCoursesPage } from "./pages/MyCoursesPage/MyCoursesPage";
-
+import { createBrowserRouter } from 'react-router-dom';
+import { App } from './App';
+import { LoginPage } from './pages/LoginPage/LoginPage';
+import { RegistartionPage } from './pages/RegistartionPage/RegistrationPage';
+import { GroupsPage } from './pages/GroupsPage/GroupsPage';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
+import { MainPage } from './pages/MainPage/MainPage';
+import { GroupPage } from './pages/GroupPage/GroupPage';
+import { TeachCoursesPage } from './pages/TeachCoursesPage/TeachCoursesPage';
+import { CoursePage } from './pages/CoursePage/CoursePage';
+import { MyCoursesPage } from './pages/MyCoursesPage/MyCoursesPage';
 
 export const Router = createBrowserRouter([
   {
@@ -34,7 +33,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: '/groups/:groupId',
-        element: <GroupPage />
+        element: <GroupPage />,
       },
       {
         path: '/profile',
@@ -50,7 +49,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: '/courses/:courseId',
-        element: <CoursePage />
+        element: <CoursePage />,
       },
     ],
   },

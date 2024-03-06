@@ -18,7 +18,7 @@
 //   // });
 
 //   const getUsers = useGetUsersQuery();
-//   // const users = 
+//   // const users =
 //   //   [
 //   //     {
 //   //         id: "ddc025f9-f9b3-41be-12cd-08db2e8acafa",
@@ -33,7 +33,7 @@
 //   //         fullName: "Второй Препод Курсович"
 //   //     },
 //   //   ]
-  
+
 //   console.log(getUsers.data);
 //   const users = Array.isArray(getUsers.data) ? getUsers.data : [];
 
@@ -49,8 +49,8 @@
 //       loading={getUsers.isLoading}
 //     />
 //       )}
-   
+
 //     </div>
-  
+
 //   );
 // };

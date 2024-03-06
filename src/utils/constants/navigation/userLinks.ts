@@ -1,9 +1,8 @@
-import { ROUTES } from "../routes";
+import { ROUTES } from '../routes';
 
 export const USER_LINKS: NavigationLinkInfo[] = [
-    {
-      text: 'Группы курсов',
-      href: ROUTES.COURSESGROUPS,
-    },
-  ];
-  
+  {
+    text: 'Группы курсов',
+    href: ROUTES.COURSESGROUPS,
+  },
+];

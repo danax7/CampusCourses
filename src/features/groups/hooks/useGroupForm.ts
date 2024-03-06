@@ -7,21 +7,19 @@ import { useQueryClient } from '@tanstack/react-query';
 import { usePutGroupEditMutation } from '@/utils/api/hooks/usePutGroupEditMutation';
 import { useEffect } from 'react';
 
-
 interface useGroupFormProps {
   actionType: 'add' | 'edit';
   group?: GroupLiteDto;
 }
 
-export const useGroupForm = ({actionType, group}:useGroupFormProps) => {
-  
+export const useGroupForm = ({ actionType, group }: useGroupFormProps) => {
   const queryClient = useQueryClient();
 
   const groupForm = useForm<GroupSchema>({
     resolver: zodResolver(groupSchema),
     defaultValues: {
-      name: ''
-    }
+      name: '',
+    },
   });
 
   const postCreateGroup = usePostCreateGroupMutation();
@@ -37,18 +35,19 @@ export const useGroupForm = ({actionType, group}:useGroupFormProps) => {
     if (actionType === 'add') {
       const res = await postCreateGroup.mutateAsync(values);
       if (res.data) {
-        queryClient.invalidateQueries({queryKey: ['getGroups']});
+        queryClient.invalidateQueries({ queryKey: ['getGroups'] });
         toast.info('Группа успешно создана', {
-          cancel: { label: 'Close' }
+          cancel: { label: 'Close' },
         });
       }
     } else if (actionType === 'edit') {
-   
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       const res = await putGroupEdit.mutateAsync({ id: group?.id, data: values });
       if (res.data) {
-        queryClient.invalidateQueries({queryKey: ['getGroups']});
+        queryClient.invalidateQueries({ queryKey: ['getGroups'] });
         toast.info('Группа успешно отредактирована', {
-          cancel: { label: 'Close' }
+          cancel: { label: 'Close' },
         });
       }
     }
@@ -56,9 +55,9 @@ export const useGroupForm = ({actionType, group}:useGroupFormProps) => {
 
   return {
     state: {
-      isLoading: postCreateGroup.isPending || putGroupEdit.isPending
+      isLoading: postCreateGroup.isPending || putGroupEdit.isPending,
     },
     form: groupForm,
-    functions: { onSubmit }
+    functions: { onSubmit },
   };
 };
