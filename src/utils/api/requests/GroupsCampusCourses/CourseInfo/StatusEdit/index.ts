@@ -1,13 +1,12 @@
 import { api } from '@/utils/api/instance';
 
-export const postEditCourseStatus = async ({
-  id,
-  data,
-}: {
-  id: string;
-  data: EditStudentStatusDto;
-}) => {
-  return api.post(`courses/${id}/status`, data, {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  });
+export type PostEditCourseStatusParams = {
+  courceId: string;
+  data: EditCourseStatusDto;
 };
+
+export const postEditCourseStatus = async ({
+  params,
+  config,
+}: RequestParams<PostEditCourseStatusParams>) =>
+  api.post(`courses/${params.courceId}/status`, params.data, config);

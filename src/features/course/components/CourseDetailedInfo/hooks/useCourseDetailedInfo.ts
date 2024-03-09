@@ -31,10 +31,10 @@ export const useCourseDetailedInfo = (courseId: string) => {
     });
 
     if (res.data) {
-      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
       toast.info('Статус пользователя успешно изменен', {
         cancel: { label: 'Close' },
       });
+      queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
     }
   };
 

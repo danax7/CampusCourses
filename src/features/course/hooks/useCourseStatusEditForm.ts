@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import { usePostEditCourseStatusMutation } from '@/utils/api/hooks/usePutEditCourseStatus';
 
 interface useCourseStatusEditFormProps {
-  status: string;
+  status: СourseStatus;
 }
 
 export const useCourseStatusEditForm = ({ status }: useCourseStatusEditFormProps) => {
@@ -27,9 +27,10 @@ export const useCourseStatusEditForm = ({ status }: useCourseStatusEditFormProps
   const postEditCourseStatus = usePostEditCourseStatusMutation();
 
   const onSubmit = courseStatusEditForm.handleSubmit(async (values) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    const res = await postEditCourseStatus.mutateAsync({ id: courseId!, data: values });
+    const res = await postEditCourseStatus.mutateAsync({
+      courceId: courseId!,
+      data: values,
+    });
     if (res) {
       queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
       toast.info('Статус успешно отредактирован', {

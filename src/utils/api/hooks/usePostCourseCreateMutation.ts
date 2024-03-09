@@ -8,7 +8,11 @@ export const usePostCourseCreateMutation = (
   settings?: MutationSettings<PostCampusCourseCreateParams, typeof postCreateGroupCourse>,
 ) =>
   useMutation({
-    mutationKey: ['postCourseCreate'],
-    mutationFn: (params) => postCreateGroupCourse(params),
+    mutationKey: ['postCreateGroupCourse'],
+    mutationFn: (params) =>
+      postCreateGroupCourse({
+        params,
+        ...(settings?.config && { config: settings.config }),
+      }),
     ...settings?.options,
   });

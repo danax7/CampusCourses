@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCourseStatusEditForm } from '../hooks/useCourseStatusEditForm';
 
 interface CourseStatusEditFormProps {
-  status: string;
+  status: СourseStatus;
 }
 
 export const CourseStatusEditForm = ({ status }: CourseStatusEditFormProps) => {

@@ -6,20 +6,7 @@ export type PostAddTeacherMutationParams = {
 };
 
 export const postAddTeacher = async ({
-  courseId,
-  data,
+  params,
   config,
-}: {
-  courseId: string;
-  data: AddTeacherDto;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config?: any;
-}) => {
-  return api.post(`courses/${courseId}/teachers`, data, {
-    ...config,
-    headers: {
-      ...config?.headers,
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
-};
+}: RequestParams<PostAddTeacherMutationParams>) =>
+  api.post(`courses/${params.courseId}/teachers`, params.data, config);

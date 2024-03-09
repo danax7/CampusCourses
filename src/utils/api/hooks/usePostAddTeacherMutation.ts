@@ -9,6 +9,10 @@ export const usePostAddTeacherMutation = (
 ) =>
   useMutation({
     mutationKey: ['postAddTeacher'],
-    mutationFn: (params) => postAddTeacher(params),
+    mutationFn: (params) =>
+      postAddTeacher({
+        params,
+        ...(settings?.config && { config: settings.config }),
+      }),
     ...settings?.options,
   });

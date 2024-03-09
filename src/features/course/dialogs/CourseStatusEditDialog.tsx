@@ -9,7 +9,7 @@ import { CourseStatusEditForm } from '../forms/CourseStatusEditForm';
 
 interface CourseStatusEditDialogProps {
   trigger: JSX.Element;
-  status: string;
+  status: СourseStatus;
 }
 
 export const CourseStatusEditDialog = ({

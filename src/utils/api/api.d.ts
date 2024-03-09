@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface MutationSettings<Params = void, Func = unknown> {
   config?: ApiRequestConfig;
   options?: import('@tanstack/react-query').UseMutationOptions<
@@ -132,6 +133,11 @@ interface NotificationDto {
   isImportant: string;
 }
 
+interface CreateNotificationDto {
+  text: string;
+  isImportant: boolean;
+}
+
 interface CampusCourseFullDto extends CampusCourseDto {
   maximumStudentsCount: number;
   studentsEnrolledCount: number;
@@ -158,4 +164,17 @@ interface AddTeacherDto {
 
 interface EditStudentStatusDto {
   status: StudentStatuses;
+}
+
+interface EditCourseStatusDto {
+  status: СourseStatus;
+}
+
+interface EditCourseDto {
+  requirements: string;
+  annotations: string;
+}
+
+interface EditGroupDto {
+  name: string;
 }

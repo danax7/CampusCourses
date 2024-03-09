@@ -9,6 +9,10 @@ export const usePostSignUpForCourseMutation = (
 ) =>
   useMutation({
     mutationKey: ['signUpForCourse'],
-    mutationFn: (params) => signUpForCourse(params),
+    mutationFn: (params) =>
+      signUpForCourse({
+        params,
+        ...(settings?.config && { config: settings.config }),
+      }),
     ...settings?.options,
   });

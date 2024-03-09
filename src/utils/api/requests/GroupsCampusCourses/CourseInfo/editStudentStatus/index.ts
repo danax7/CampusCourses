@@ -11,9 +11,5 @@ export const postEditStudentStatus = async ({
   studentId,
   data,
 }: PostEditStudentStatusParams) => {
-  return api.post(`courses/${courseId}/student-status/${studentId}`, data, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
+  return api.post(`courses/${courseId}/student-status/${studentId}`, data);
 };

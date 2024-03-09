@@ -26,10 +26,8 @@ export const useCreateNotificationForm = () => {
   const onSubmit = courseStatusEditForm.handleSubmit(async (values) => {
     const isImportant = values.isImportant === 'true';
     const res = await postCreateNotification.mutateAsync({
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      id: courseId,
-      data: { ...values, isImportant },
+      id: courseId!,
+      notification: { ...values, isImportant },
     });
     if (res.data) {
       queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });

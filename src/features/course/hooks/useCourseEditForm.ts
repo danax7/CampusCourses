@@ -29,9 +29,7 @@ export const useCourseEditForm = ({
   const putEditStatus = usePutEditCourseMutation();
 
   const onSubmit = courseEditForm.handleSubmit(async (values) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    const res = await putEditStatus.mutateAsync({ id: courseId, data: values });
+    const res = await putEditStatus.mutateAsync({ id: courseId!, info: values });
 
     if (res.data) {
       queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });

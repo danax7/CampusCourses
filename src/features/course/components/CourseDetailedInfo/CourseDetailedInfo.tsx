@@ -204,40 +204,46 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
               </div>
               {student.status !== 'Declined' && student.status !== 'InQueue' && (
                 <>
-                  <div className='flex-auto'>
-                    <EditStudentMarkDialog
-                      trigger={
-                        <div className='flex items-center flex-wrap gap-2'>
-                          <h4 className='cursor-pointer underline'>
-                            Промежуточная аттестация
-                          </h4>
-                          <Badge
-                            className={cn(getStudentMarkColor(student.midtermResult))}
-                          >
-                            {StudentMarkTexts[student.midtermResult!]}
-                          </Badge>
-                        </div>
-                      }
-                      markType='Midterm'
-                      studentId={student.id}
-                    />
-                  </div>
-                  <div className='flex-auto'>
-                    <EditStudentMarkDialog
-                      trigger={
-                        <div className='flex items-center flex-wrap gap-2'>
-                          <h4 className='cursor-pointer underline'>
-                            Финальная аттестация
-                          </h4>
-                          <Badge className={cn(getStudentMarkColor(student.finalResult))}>
-                            {StudentMarkTexts[student.finalResult!]}
-                          </Badge>
-                        </div>
-                      }
-                      markType='Final'
-                      studentId={student.id}
-                    />
-                  </div>
+                  {student.midtermResult && (
+                    <div className='flex-auto'>
+                      <EditStudentMarkDialog
+                        trigger={
+                          <div className='flex items-center flex-wrap gap-2'>
+                            <h4 className='cursor-pointer underline'>
+                              Промежуточная аттестация
+                            </h4>
+                            <Badge
+                              className={cn(getStudentMarkColor(student.midtermResult))}
+                            >
+                              {StudentMarkTexts[student.midtermResult!]}
+                            </Badge>
+                          </div>
+                        }
+                        markType='Midterm'
+                        studentId={student.id}
+                      />
+                    </div>
+                  )}
+                  {student.finalResult && (
+                    <div className='flex-auto'>
+                      <EditStudentMarkDialog
+                        trigger={
+                          <div className='flex items-center flex-wrap gap-2'>
+                            <h4 className='cursor-pointer underline'>
+                              Финальная аттестация
+                            </h4>
+                            <Badge
+                              className={cn(getStudentMarkColor(student.finalResult))}
+                            >
+                              {StudentMarkTexts[student.finalResult!]}
+                            </Badge>
+                          </div>
+                        }
+                        markType='Final'
+                        studentId={student.id}
+                      />
+                    </div>
+                  )}
                 </>
               )}
 

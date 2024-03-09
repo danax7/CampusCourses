@@ -4,8 +4,8 @@ import { GroupSchema, groupSchema } from '../constants/GroupSchema';
 import { usePostCreateGroupMutation } from '@/utils/api/hooks/usePostGroupMutation';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
-import { usePutGroupEditMutation } from '@/utils/api/hooks/usePutGroupEditMutation';
 import { useEffect } from 'react';
+import { usePutGroupEditMutation } from '@/utils/api/hooks/usePutGroupEditMutation';
 
 interface useGroupFormProps {
   actionType: 'add' | 'edit';
@@ -41,9 +41,7 @@ export const useGroupForm = ({ actionType, group }: useGroupFormProps) => {
         });
       }
     } else if (actionType === 'edit') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      const res = await putGroupEdit.mutateAsync({ id: group?.id, data: values });
+      const res = await putGroupEdit.mutateAsync({ id: group!.id, name: values });
       if (res.data) {
         queryClient.invalidateQueries({ queryKey: ['getGroups'] });
         toast.info('Группа успешно отредактирована', {

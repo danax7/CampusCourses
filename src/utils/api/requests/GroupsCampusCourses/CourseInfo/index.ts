@@ -1,8 +1,6 @@
-import { api } from "@/utils/api/instance";
+import { api } from '@/utils/api/instance';
 
 export const getCourseInfoById = async (id: string) => {
-    const response = await api.get<CampusCourseFullDto>(`/courses/${id}/details`,{
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    });
-    return response.data;
-}
+  const response = await api.get<CampusCourseFullDto>(`/courses/${id}/details`);
+  return response.data;
+};
