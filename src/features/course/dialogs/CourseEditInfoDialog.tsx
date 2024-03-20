@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui';
-import { CourseEditForm } from '../forms/CourseEditForm';
+import { CourseEditDescriptionForm } from '../forms/CourseEditDescriptionForm';
 
 interface CourseEditInfoDialogDialogProps {
   trigger: JSX.Element;
@@ -26,7 +26,10 @@ export const CourseEditInfoDialog = ({
           <DialogTitle className='space-y-2'>Редактирование курса</DialogTitle>
         </DialogHeader>
         <div className='flex h-full flex-col items-end justify-between overflow-y-auto rounded-lg border p-5'>
-          <CourseEditForm annotations={annotations} requirements={requirments} />
+          <CourseEditDescriptionForm
+            annotations={annotations}
+            requirements={requirments}
+          />
         </div>
       </DialogContent>
     </Dialog>

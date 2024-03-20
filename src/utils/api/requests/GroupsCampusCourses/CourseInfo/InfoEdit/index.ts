@@ -1,12 +1,12 @@
 import { api } from '@/utils/api/instance';
 
-export interface PutEditCourseParams {
+export interface PutEditCourseDescriptionParams {
   id: string;
   info: EditCourseDto;
 }
 
-export const putEditCourse = async ({
+export const PutEditCourseDescription = async ({
   params,
   config,
-}: RequestParams<PutEditCourseParams>) =>
-  api.put(`courses/${params.id}`, params.info, config);
+}: RequestParams<PutEditCourseDescriptionParams>) =>
+  api.put(`courses/${params.id}/requirements-and-annotations`, params.info, config);

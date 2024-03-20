@@ -9,4 +9,4 @@ export const postCreateGroupCourse = async ({
   params,
   config,
 }: RequestParams<PostCampusCourseCreateParams>) =>
-  api.post(`courses/${params.groupId}`, params.data, config);
+  api.post(`groups/${params.groupId}`, params.data, config);

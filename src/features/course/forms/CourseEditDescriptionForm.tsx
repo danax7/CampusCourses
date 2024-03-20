@@ -8,18 +8,22 @@ import {
   FormMessage,
   Input,
 } from '@/components/ui';
-import { useCourseEditForm } from '../hooks/useCourseEditForm';
+import { useCourseEditDescriprionForm } from '../hooks/useCourseEditDescriprionForm';
 
-interface CourseEditFormProps {
+interface CourseEditDescriptionFormProps {
   annotations: string;
   requirements: string;
 }
 
-export const CourseEditForm = ({ annotations, requirements }: CourseEditFormProps) => {
-  const { state, form, functions } = useCourseEditForm({ annotations, requirements });
+export const CourseEditDescriptionForm = ({
+  annotations,
+  requirements,
+}: CourseEditDescriptionFormProps) => {
+  const { state, form, functions } = useCourseEditDescriprionForm({
+    annotations,
+    requirements,
+  });
 
-  // const users = getUsers.data
-  // console.log(getUsers.data)
   return (
     <Form {...form}>
       <form onSubmit={functions.onSubmit} className='flex w-full flex-col items-end'>

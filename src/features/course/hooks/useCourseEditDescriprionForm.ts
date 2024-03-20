@@ -3,33 +3,39 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { CourseEditSchema, courseEditSchema } from '../constants/courseEditSchema';
-import { usePutEditCourseMutation } from '@/utils/api/hooks/usePutEditCourseMutation';
+import { usePutEditCourseDescriptionMutation } from '@/utils/api/hooks/usePutEditCourseDescriptionMutation';
+import {
+  CourseEditDescriptionSchema,
+  courseEditDescriptionSchema,
+} from '../constants/courseEditDescriptionSchema';
 
-interface useCourseEditFormProps {
+interface useCourseEditDescriprionFormProps {
   requirements: string;
   annotations: string;
 }
 
-export const useCourseEditForm = ({
+export const useCourseEditDescriprionForm = ({
   requirements,
   annotations,
-}: useCourseEditFormProps) => {
+}: useCourseEditDescriprionFormProps) => {
   const queryClient = useQueryClient();
   const { courseId } = useParams<{ courseId: string }>();
 
-  const courseEditForm = useForm<CourseEditSchema>({
-    resolver: zodResolver(courseEditSchema),
+  const courseEditDescriptionForm = useForm<CourseEditDescriptionSchema>({
+    resolver: zodResolver(courseEditDescriptionSchema),
     defaultValues: {
       annotations: annotations || '',
       requirements: requirements || '',
     },
   });
 
-  const putEditStatus = usePutEditCourseMutation();
+  const putEditCourseDescription = usePutEditCourseDescriptionMutation();
 
-  const onSubmit = courseEditForm.handleSubmit(async (values) => {
-    const res = await putEditStatus.mutateAsync({ id: courseId!, info: values });
+  const onSubmit = courseEditDescriptionForm.handleSubmit(async (values) => {
+    const res = await putEditCourseDescription.mutateAsync({
+      id: courseId!,
+      info: values,
+    });
 
     if (res.data) {
       queryClient.invalidateQueries({ queryKey: ['groupCourseDetailedInfo'] });
@@ -41,9 +47,9 @@ export const useCourseEditForm = ({
 
   return {
     state: {
-      isLoading: putEditStatus.isPending,
+      isLoading: putEditCourseDescription.isPending,
     },
-    form: courseEditForm,
+    form: courseEditDescriptionForm,
     functions: { onSubmit },
   };
 };

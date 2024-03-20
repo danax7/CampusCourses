@@ -18,10 +18,11 @@ import { CourseStatusEditDialog } from '../../dialogs/CourseStatusEditDialog';
 import { CreateNotificationDialog } from '../../dialogs/CreateNotificationDialog';
 import { CourseEditInfoDialog } from '../../dialogs/CourseEditInfoDialog';
 import { AddTeacherDialog } from '../../dialogs/AddTeacherDialog';
-import { selectUserRoles } from '@/utils/AuthSlice/slice';
+import { selectUserEmail, selectUserRoles } from '@/utils/AuthSlice/slice';
 import { useSelector } from 'react-redux';
 import { useCourseDetailedInfo } from './hooks/useCourseDetailedInfo';
 import { EditStudentMarkDialog } from '../../dialogs/EditStudentMarkDialog';
+import { useGetTeachCoursesQuery } from '@/utils/api/hooks/useGetTeachCoursesQuery';
 
 interface CourceDetailedInfoProps {
   course: CampusCourseFullDto;
@@ -36,6 +37,21 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
     handleChangeUserStatus,
   } = useCourseDetailedInfo(course.id);
 
+  //cringe
+  const teachCourses = useGetTeachCoursesQuery().data?.data;
+  const userEmail = useSelector(selectUserEmail);
+
+  const isUserCourseTeacher = teachCourses?.some((group) => group.id === course.id);
+  const isUserCourseTeacherOrAdmin = isUserCourseTeacher || userRole.isAdmin;
+  const isUserMainTeacher = course.teachers[0].email === userEmail;
+
+  const isUserMainTeacherOrAdmin = isUserMainTeacher || userRole.isAdmin;
+  //cringe
+
+  console.log('@isUserMainTeacher', isUserMainTeacher);
+  console.log('@isUserCourseTeacher', isUserCourseTeacher);
+  console.log('@isUserCourseTeacherOrAdmin', isUserCourseTeacherOrAdmin);
+
   return (
     <div>
       <span className='text-3xl font-semibold'>{course.name}</span>
@@ -43,7 +59,7 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
         <CardHeader>
           <CardTitle className='flex justify-between'>
             <span>Основные данные курса </span>
-            {userRole.isAdmin && (
+            {isUserCourseTeacher && (
               <CourseEditInfoDialog
                 trigger={<Button variant='secondary'>Редактировать</Button>}
                 requirments={course.requirements}
@@ -60,13 +76,13 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
                 {statusTexts[course.status]}
               </span>
             </div>
-            {userRole.isAdmin && (
+            {isUserCourseTeacherOrAdmin && (
               <CourseStatusEditDialog
                 trigger={<Button variant='secondary'>Изменить</Button>}
                 status={course.status}
               />
             )}
-            {!userRole.isAdmin && course.status === 'OpenForAssigning' && (
+            {!isUserCourseTeacherOrAdmin && course.status === 'OpenForAssigning' && (
               <Button onClick={handleSignUpForCourse} loading={isLoading}>
                 Записаться на курс
               </Button>
@@ -112,13 +128,16 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
             Аннотации
           </TabsTrigger>
           <TabsTrigger value='notifications' className='flex-auto'>
-            Уведомления
+            Уведомления{' '}
+            {course.notifications && (
+              <Badge className='mx-1'>{course.notifications.length}</Badge>
+            )}
           </TabsTrigger>
         </TabsList>
         <TabsContent value='requirements'>{course.requirements}</TabsContent>
         <TabsContent value='annotations'>{course.annotations}</TabsContent>
         <TabsContent value='notifications'>
-          {userRole.isAdmin && (
+          {isUserCourseTeacherOrAdmin && (
             <CreateNotificationDialog
               trigger={
                 <Button className='my-3'>
@@ -129,7 +148,7 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
             />
           )}
           <div>
-            {course.notifications.length === 0 && <span>Уведомлений пока нет</span>}
+            {course.notifications && <span>Уведомлений пока нет</span>}
             {course.notifications.map((notification, index) => (
               <div
                 key={index}
@@ -162,7 +181,7 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value='teachers'>
-          {userRole.isAdmin && (
+          {isUserMainTeacherOrAdmin && (
             <AddTeacherDialog
               trigger={
                 <Button className='my-1'>

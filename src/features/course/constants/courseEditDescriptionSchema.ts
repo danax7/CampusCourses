@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const courseEditSchema = z.object({
+export const courseEditDescriptionSchema = z.object({
   requirements: z.string().min(1, {
     message: 'validation.required',
   }),
@@ -9,4 +9,4 @@ export const courseEditSchema = z.object({
   }),
 });
 
-export type CourseEditSchema = z.infer<typeof courseEditSchema>;
+export type CourseEditDescriptionSchema = z.infer<typeof courseEditDescriptionSchema>;
