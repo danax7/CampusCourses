@@ -7,13 +7,14 @@ import { CourseCreateSchema, courceCreateSchema } from '../constants/CourceCreat
 import { useGetUsersQuery } from '@/utils/api/hooks/useGetUsersQuery';
 import { usePostCourseCreateMutation } from '@/utils/api/hooks/usePostCourseCreateMutation';
 import { useParams } from 'react-router-dom';
+import { usePutEditCourseDetailedInfo } from '@/utils/api/hooks/usePutEditCourseDetailedInfoMutation';
 
 interface useCourseCreateFormProps {
   actionType: 'add' | 'edit';
-  // cource?: CampusCourseDto;
+  cource?: CampusCourseFullInfo;
 }
 
-export const useCourseCreateForm = ({ actionType }: useCourseCreateFormProps) => {
+export const useCourseCreateForm = ({ actionType, cource }: useCourseCreateFormProps) => {
   const { groupId } = useParams<{ groupId: string }>();
   const [selectedUser, setSelectedUser] = useState('');
   const queryClient = useQueryClient();
@@ -22,13 +23,13 @@ export const useCourseCreateForm = ({ actionType }: useCourseCreateFormProps) =>
   const courceCreateForm = useForm<CourseCreateSchema>({
     resolver: zodResolver(courceCreateSchema),
     defaultValues: {
-      name: '',
-      startYear: 2024,
-      maximumStudentsCount: 100,
-      semester: '',
-      requirements: '',
-      annotations: '',
-      mainTeacherId: '',
+      name: cource?.name ?? '',
+      startYear: cource?.startYear ?? 2024,
+      maximumStudentsCount: cource?.maximumStudentsCount ?? 100,
+      semester: cource?.semester ?? '',
+      requirements: cource?.requirements ?? '',
+      annotations: cource?.annotations ?? '',
+      mainTeacherId: '', // cringe
     },
   });
 
@@ -38,6 +39,7 @@ export const useCourseCreateForm = ({ actionType }: useCourseCreateFormProps) =>
   };
 
   const postCreateCourse = usePostCourseCreateMutation();
+  const putEditCourseDetailedInfo = usePutEditCourseDetailedInfo();
 
   const onSubmit = courceCreateForm.handleSubmit(async (values) => {
     if (actionType === 'add') {
@@ -49,18 +51,20 @@ export const useCourseCreateForm = ({ actionType }: useCourseCreateFormProps) =>
           cancel: { label: 'Close' },
         });
       }
+    } else if (actionType === 'edit') {
+      const res = await putEditCourseDetailedInfo.mutateAsync({
+        courceId: cource!.id,
+        data: values,
+      });
+      if (res.data) {
+        queryClient.invalidateQueries({
+          queryKey: ['groupCourseDetailedInfo', cource?.id],
+        });
+        toast.info('Курс успешно отредактирован', {
+          cancel: { label: 'Close' },
+        });
+      }
     }
-
-    // else if (actionType === 'edit') {
-
-    //   const res = await putGroupEdit.mutateAsync({ id: group?.id, data: values });
-    //   if (res.data) {
-    //     queryClient.invalidateQueries('getGroups');
-    //     toast.info('Группа успешно отредактирована', {
-    //       cancel: { label: 'Close' }
-    //     });
-    //   }
-    // }
   });
 
   return {

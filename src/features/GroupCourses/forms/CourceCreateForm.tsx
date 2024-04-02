@@ -16,12 +16,12 @@ import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxIt
 
 interface CourceCreateProps {
   actionType: 'add' | 'edit';
-  cource?: CampusCourseDto;
+  cource?: CampusCourseFullInfo;
 }
 
-export const CourceCreateForm = ({ actionType }: CourceCreateProps) => {
+export const CourceCreateForm = ({ actionType, cource }: CourceCreateProps) => {
   const { state, form, functions, users, selectedUser, handleUserSelect } =
-    useCourseCreateForm({ actionType });
+    useCourseCreateForm({ actionType, cource });
 
   // const users = getUsers.data
   // console.log(getUsers.data)

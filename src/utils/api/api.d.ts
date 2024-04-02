@@ -139,6 +139,7 @@ interface CreateNotificationDto {
 }
 
 interface CampusCourseFullDto extends CampusCourseDto {
+  id: string;
   maximumStudentsCount: number;
   studentsEnrolledCount: number;
   studentsInQueueCount: number;
@@ -147,6 +148,18 @@ interface CampusCourseFullDto extends CampusCourseDto {
   students: UserDto[];
   teachers: TeacherDto[];
   notifications: NotificationDto[];
+}
+
+interface CampusCourseFullInfo {
+  id: string;
+  maximumStudentsCount: number;
+  requirements: string;
+  annotations: string;
+  name: string;
+  startYear: number;
+  status: СourseStatus;
+  semester: string;
+  // mainTeacherId: string;
 }
 
 interface CampusCourseCreateDtoRequest extends CampusCourseCreateDto {
@@ -173,6 +186,16 @@ interface EditCourseStatusDto {
 interface EditCourseDto {
   requirements: string;
   annotations: string;
+}
+
+interface EditCourseDetailedInfoDto {
+  name: string;
+  startYear: number;
+  maximumStudentsCount: number;
+  semester: string;
+  requirements: string;
+  annotations: string;
+  mainTeacherId: string;
 }
 
 interface EditGroupDto {

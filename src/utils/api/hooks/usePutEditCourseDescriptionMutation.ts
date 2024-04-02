@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import {
   PutEditCourseDescriptionParams,
   PutEditCourseDescription,
-} from '../requests/GroupsCampusCourses/CourseInfo/InfoEdit';
+} from '../requests/GroupsCampusCourses/CourseInfo/editCourseDescription';
 
 export const usePutEditCourseDescriptionMutation = (
   settings?: MutationSettings<

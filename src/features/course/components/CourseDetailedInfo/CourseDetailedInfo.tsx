@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import { useCourseDetailedInfo } from './hooks/useCourseDetailedInfo';
 import { EditStudentMarkDialog } from '../../dialogs/EditStudentMarkDialog';
 import { useGetTeachCoursesQuery } from '@/utils/api/hooks/useGetTeachCoursesQuery';
+import { CourseCreateEditDialog } from '@/features/GroupCourses/component/CourseCreateEditDialog/CourseCreateEditDialog';
 
 interface CourceDetailedInfoProps {
   course: CampusCourseFullDto;
@@ -48,10 +49,6 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
   const isUserMainTeacherOrAdmin = isUserMainTeacher || userRole.isAdmin;
   //cringe
 
-  console.log('@isUserMainTeacher', isUserMainTeacher);
-  console.log('@isUserCourseTeacher', isUserCourseTeacher);
-  console.log('@isUserCourseTeacherOrAdmin', isUserCourseTeacherOrAdmin);
-
   return (
     <div>
       <span className='text-3xl font-semibold'>{course.name}</span>
@@ -64,6 +61,13 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
                 trigger={<Button variant='secondary'>Редактировать</Button>}
                 requirments={course.requirements}
                 annotations={course.annotations}
+              />
+            )}
+            {userRole.isAdmin && (
+              <CourseCreateEditDialog
+                trigger={<Button variant='secondary'>Редактировать</Button>}
+                cource={course}
+                actionType='edit'
               />
             )}
           </CardTitle>

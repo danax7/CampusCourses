@@ -9,8 +9,8 @@ import { CourceCreateForm } from '../../forms/CourceCreateForm';
 
 interface CourseCreateEditDialogProps {
   trigger: JSX.Element;
-  actionType: 'add' | 'edit';
-  cource?: CampusCourseDto;
+  actionType?: 'add' | 'edit';
+  cource?: CampusCourseFullInfo;
 }
 
 export const CourseCreateEditDialog = ({
@@ -32,8 +32,7 @@ export const CourseCreateEditDialog = ({
           )}
         </DialogHeader>
         <div className='flex h-full flex-col items-end justify-between overflow-y-auto rounded-lg border p-5'>
-          {/* <GroupForm actionType={actionType} group={group} /> */}
-          <CourceCreateForm actionType={actionType} cource={cource} />
+          <CourceCreateForm actionType={actionType ?? 'add'} cource={cource} />
         </div>
       </DialogContent>
     </Dialog>
