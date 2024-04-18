@@ -47,6 +47,8 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
   const isUserMainTeacher = course.teachers[0].email === userEmail;
 
   const isUserMainTeacherOrAdmin = isUserMainTeacher || userRole.isAdmin;
+
+  const isUserMainTeacherAndAdmin = isUserMainTeacher && userRole.isAdmin;
   //cringe
 
   return (
@@ -56,7 +58,7 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
         <CardHeader>
           <CardTitle className='flex justify-between'>
             <span>Основные данные курса </span>
-            {isUserCourseTeacher && (
+            {isUserCourseTeacher && !isUserMainTeacherAndAdmin && (
               <CourseEditInfoDialog
                 trigger={
                   <Button variant='secondary'>

@@ -38,7 +38,7 @@ export const CourseEditDescriptionForm = ({
                   <FormLabel>Аннотации</FormLabel>
                   <FormControl>
                     {/* <Input {...field} placeholder='Введите текст' /> */}
-                    <RichTextEditor initText={''} {...field} />
+                    <RichTextEditor initText={form.getValues('annotations')} {...field} />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.annotations && (
@@ -56,7 +56,10 @@ export const CourseEditDescriptionForm = ({
                   <FormLabel>Требования</FormLabel>
                   <FormControl>
                     {/* <Input {...field} placeholder='Введите текст' /> */}
-                    <RichTextEditor initText={''} {...field} />
+                    <RichTextEditor
+                      initText={form.getValues('requirements')}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.requirements && (
