@@ -58,7 +58,11 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
             <span>Основные данные курса </span>
             {isUserCourseTeacher && (
               <CourseEditInfoDialog
-                trigger={<Button variant='secondary'>Редактировать</Button>}
+                trigger={
+                  <Button variant='secondary'>
+                    Редактировать аннотации и требования
+                  </Button>
+                }
                 requirments={course.requirements}
                 annotations={course.annotations}
               />
@@ -138,8 +142,18 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
             )}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value='requirements'>{course.requirements}</TabsContent>
-        <TabsContent value='annotations'>{course.annotations}</TabsContent>
+        <TabsContent value='requirements'>
+          <div
+            className='ql-editor'
+            dangerouslySetInnerHTML={{ __html: course.requirements }}
+          />
+        </TabsContent>
+        <TabsContent value='annotations'>
+          <div
+            className='ql-editor'
+            dangerouslySetInnerHTML={{ __html: course.annotations }}
+          />
+        </TabsContent>
         <TabsContent value='notifications'>
           {isUserCourseTeacherOrAdmin && (
             <CreateNotificationDialog

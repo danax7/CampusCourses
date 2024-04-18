@@ -2,10 +2,10 @@ import * as z from 'zod';
 
 export const notificationCreateSchema = z.object({
   text: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   isImportant: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
 });
 

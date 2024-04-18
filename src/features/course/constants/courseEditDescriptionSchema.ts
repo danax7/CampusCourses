@@ -2,10 +2,10 @@ import * as z from 'zod';
 
 export const courseEditDescriptionSchema = z.object({
   requirements: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   annotations: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
 });
 
