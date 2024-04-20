@@ -20,6 +20,8 @@ export const useCourseCreateForm = ({ actionType, cource }: useCourseCreateFormP
   const queryClient = useQueryClient();
   const getUsers = useGetUsersQuery();
 
+  console.log('@cource', cource);
+
   const courceCreateForm = useForm<CourseCreateSchema>({
     resolver: zodResolver(courceCreateSchema),
     defaultValues: {

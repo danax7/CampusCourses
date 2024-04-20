@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 export const courceCreateSchema = z.object({
   name: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   startYear: z.coerce
     .number()
@@ -13,16 +13,16 @@ export const courceCreateSchema = z.object({
     .max(200, 'Курс не может содержать больше 200 человек')
     .min(1, 'Курс должен содержать больше 1 человека'),
   semester: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   requirements: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   annotations: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   mainTeacherId: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
 });
 

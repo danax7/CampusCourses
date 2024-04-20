@@ -9,7 +9,6 @@ export const getNavigationLinksByUserRole = (userRole: UserRolesResponse) => {
   const {
     isStudent,
     isTeacher,
-    //  isAdmin
   } = userRole;
 
   if (isStudent && isTeacher) {

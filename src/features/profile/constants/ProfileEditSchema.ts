@@ -2,10 +2,10 @@ import * as z from 'zod';
 
 export const profileEditSchema = z.object({
   birthDate: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
   fullName: z.string().min(1, {
-    message: 'validation.required',
+    message: 'Это обязательное поле',
   }),
 });
 

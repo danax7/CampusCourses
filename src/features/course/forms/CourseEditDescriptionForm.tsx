@@ -9,6 +9,7 @@ import {
   Input,
 } from '@/components/ui';
 import { useCourseEditDescriprionForm } from '../hooks/useCourseEditDescriprionForm';
+import { RichTextEditor } from '@/components/common/RichTextEditor/RichTextEditor';
 
 interface CourseEditDescriptionFormProps {
   annotations: string;
@@ -36,7 +37,8 @@ export const CourseEditDescriptionForm = ({
                 <FormItem>
                   <FormLabel>Аннотации</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='Введите текст' />
+                    {/* <Input {...field} placeholder='Введите текст' /> */}
+                    <RichTextEditor initText={form.getValues('annotations')} {...field} />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.annotations && (
@@ -53,7 +55,11 @@ export const CourseEditDescriptionForm = ({
                 <FormItem>
                   <FormLabel>Требования</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='Введите текст' />
+                    {/* <Input {...field} placeholder='Введите текст' /> */}
+                    <RichTextEditor
+                      initText={form.getValues('requirements')}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.requirements && (

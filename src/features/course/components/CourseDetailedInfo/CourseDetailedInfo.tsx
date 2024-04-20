@@ -47,6 +47,8 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
   const isUserMainTeacher = course.teachers[0].email === userEmail;
 
   const isUserMainTeacherOrAdmin = isUserMainTeacher || userRole.isAdmin;
+
+  const isUserMainTeacherAndAdmin = isUserMainTeacher && userRole.isAdmin;
   //cringe
 
   return (
@@ -56,9 +58,13 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
         <CardHeader>
           <CardTitle className='flex justify-between'>
             <span>Основные данные курса </span>
-            {isUserCourseTeacher && (
+            {isUserCourseTeacher && !isUserMainTeacherAndAdmin && (
               <CourseEditInfoDialog
-                trigger={<Button variant='secondary'>Редактировать</Button>}
+                trigger={
+                  <Button variant='secondary'>
+                    Редактировать аннотации и требования
+                  </Button>
+                }
                 requirments={course.requirements}
                 annotations={course.annotations}
               />
@@ -138,8 +144,18 @@ export const CourceDetailedInfo = ({ course }: CourceDetailedInfoProps) => {
             )}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value='requirements'>{course.requirements}</TabsContent>
-        <TabsContent value='annotations'>{course.annotations}</TabsContent>
+        <TabsContent value='requirements'>
+          <div
+            className='ql-editor'
+            dangerouslySetInnerHTML={{ __html: course.requirements }}
+          />
+        </TabsContent>
+        <TabsContent value='annotations'>
+          <div
+            className='ql-editor'
+            dangerouslySetInnerHTML={{ __html: course.annotations }}
+          />
+        </TabsContent>
         <TabsContent value='notifications'>
           {isUserCourseTeacherOrAdmin && (
             <CreateNotificationDialog

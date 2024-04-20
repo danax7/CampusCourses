@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCourseCreateForm } from '../hooks/useCourceCreateForm';
 // import { UsersCombobox } from '../component/UserCombobox/UserCombobox.tsx';
 import { convertUsersToComboboxItems } from '../helpers/ConvertUsersToComboboxItems';
+import { RichTextEditor } from '@/components/common/RichTextEditor/RichTextEditor';
 
 interface CourceCreateProps {
   actionType: 'add' | 'edit';
@@ -134,7 +135,11 @@ export const CourceCreateForm = ({ actionType, cource }: CourceCreateProps) => {
                 <FormItem>
                   <FormLabel>Требования</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='Введите текст' />
+                    {/* <Input {...field} placeholder='Введите текст' /> */}
+                    <RichTextEditor
+                      initText={form.getValues('requirements')}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.requirements && (
@@ -151,7 +156,11 @@ export const CourceCreateForm = ({ actionType, cource }: CourceCreateProps) => {
                 <FormItem>
                   <FormLabel>Аннотации</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='Введите текст' />
+                    {/* <Input {...field} placeholder='Введите текст' /> */}
+                    <RichTextEditor
+                      initText={form.getValues('requirements')}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState?.errors?.annotations && (
